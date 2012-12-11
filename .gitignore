@@ -4,3 +4,11 @@
 *.jar
 *.war
 *.ear
+
+# eclipse project files.
+.classpath
+.project
+.settings
+
+# cached files
+.*~
