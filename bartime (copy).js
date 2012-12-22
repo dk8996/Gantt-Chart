@@ -15,23 +15,22 @@ var trList;
 var tdList;
 
 d3.html("jobtracker.jsp", function(document) {
-    //nodeList2 = document.querySelectorAll(".sortable")[1].querySelectorAll("tr");
-     trList = document.querySelectorAll(".sortable")[1].querySelectorAll("tr");
-     tdList = document.querySelectorAll("td");
-     for (var i=0;i<tdList.length;i++)
-     { 
-     	oneTD = tdList[i];
-        allA = oneTD.querySelectorAll("a");
-	if(allA.lenght !== 0)
-	{
-	  oneA = allA[0] 	
+	// nodeList2 =
+	// document.querySelectorAll(".sortable")[1].querySelectorAll("tr");
+	trList = document.querySelectorAll(".sortable")[1].querySelectorAll("tr");
+	tdList = document.querySelectorAll("td");
+	for ( var i = 0; i < tdList.length; i++) {
+		oneTD = tdList[i];
+		allA = oneTD.querySelectorAll("a");
+		if (allA.lenght !== 0) {
+			oneA = allA[0];
+		}
 	}
-     }
 });
 
 window.transition = function(period) {
     
-}
+};
 
 var margin = {top: 40, right: 40, bottom: 40, left:150},
     width = 1000,
