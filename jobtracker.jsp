@@ -17,7 +17,7 @@
 
 
 
-<h1>ls-cl02-jt01 Hadoop Map/Reduce Administration</h1>
+<h1>Hadoop Map/Reduce Administration</h1>
 
 <div id="quicklinks">
   <a href="#quicklinks" onclick="toggle('quicklinks-list'); return false;">Quick Links</a>
