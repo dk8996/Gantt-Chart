@@ -1,7 +1,7 @@
 var DataURL = {};
-DataURL.jobTrackerURL = "http://ls-cl02-jt01.sldc.dataxu.net:50030/jobtracker.jsp";
+DataURL.jobTrackerURL = "http://localhost:50030/jobtracker.jsp";
 DataURL.proxyURL = "http://localhost:8080/__ajaxproxy/";
-DataURL.jobDetailsURL = "http://ls-cl02-jt01.sldc.dataxu.net:50030/jobdetails.jsp?jobid=";
+DataURL.jobDetailsURL = "http://localhost:50030/jobdetails.jsp?jobid=";
 
 function JobTrackerParser() {
 
@@ -25,10 +25,6 @@ function JobTrackerParser() {
 				return;
 			    }
 			    var task = jobTrackerParser.parseRunningAndCompleted(document);
-			    if (task && task.taskName === "Parsing Job") {
-				var loglineValues = jobTrackerParser.parseFileDateTime(document);
-				task.loglineValues = loglineValues;
-			    }
 			    var tasks = new Array();
 			    tasks.push(task);
 			    callback(tasks);
@@ -41,34 +37,6 @@ function JobTrackerParser() {
 	});
     };
     
-    this.parseFileDateTime = function(document) {
-	if (!document) {
-	    return;
-	}
-	var lines = document.textContent.split('\n');
-	var loglineValues = new Array();
-	for ( var i = 0; i < lines.length; i++) {
-	    if (lines[i].match(/logline.\d\d\d\d\d\d\d\d.\d\d\d\d/)) {
-		var time = lines[i].split("logline.")[1];
-		var year = time.substr(0, 4);
-		var month = time.substr(4, 2);
-		var day = time.substr(6, 2);
-		var hour = time.substr(9, 2);
-		var min = time.substr(11, 2);
-		var date = new Date(year, month - 1, day, hour, min, 0, 0);
-
-		var map = lines[i + 1].replace(/,/g, '').trim();
-		var reduce = lines[i + 2].replace(/,/g, '').trim();
-		loglineValues.push({
-		    "date" : date,
-		    "map" : parseInt(map, 10),
-		    "reduce" : parseInt(reduce, 10)
-		});
-	    }
-	}
-	return loglineValues;
-    };
-
     this.parseRetired = function(document) {
 	if (!document) {
 	    return;
