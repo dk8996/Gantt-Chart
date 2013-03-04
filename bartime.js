@@ -81,7 +81,9 @@ window.transition = function(period) {
        .delay(function(d, i) { return i * 10; })
        .attr("transform", function(d) { return "translate("+ x(new Date(d.date)) + "," + y(d.jobName) + ")"; })
        .attr('height', function(d) { return y.rangeBand(); })
-       .attr('width',  function(d) { return x(new Date(d.endDate))-x(new Date(d.date)); });
+       .attr('width',  function(d) { 
+	   return x(new Date(d.endDate))-x(new Date(d.date)); 
+	   });
 
 	svg.selectAll("line").transition()
         .attr("x1", x(new Date(nowDate)))
