@@ -1,3 +1,14 @@
+
+## Getting Started
+
+var gantt = d3.gantt().width(900).taskTypes(taskNames);
+gantt(tasks);
+
+## Dependencies & Building
+Relies on the fantastic [D3 visualization library](http://mbostock.github.com/d3/) to do lots of the heavy lifting for stacking and rendering to SVG.
+
+## License
+
    Copyright 2012 Dimitry Kudryavtsev
 
    Licensed under the Apache License, Version 2.0 (the "License");
