@@ -1,34 +1,26 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Gantt Chart</title>
-    <script type="text/javascript" src="lib/d3/d3.v2.js"></script>
+<head>
+<title>Gantt Chart</title>
+<script type="text/javascript" src="lib/d3/d3.v2.js"></script>
 <style type="text/css">
-  @import url("gantt-chart.css");
+@import url("gantt-chart-d3.css");
 </style>
-  </head>
-  <body>
-    <div class="control" id="control">
-      <button class="first last" onclick="transition('Hour')">
-        Hour
-      </button>
-      <button class="first last" onclick="transition('Day')">
-        Day
-      </button>
-      <button class="first last" onclick="transition('Few Days')">
-        Few Days
-      </button>
-      <button class="first last" onclick="transition('Week')">
-        Week
-      </button>
-      <button class="first last" onclick="transition('Month')">
-        Month
-      </button>
-      <button class="first last" onclick="update()">
-        Update
-      </button>
-    </div>
-    <script type="text/javascript" src="gantt-chart-d3.js"></script>
-    <script type="text/javascript" src="dataxu.js"></script>
-  </body>
+</head>
+<body>
+	<div class="control" id="control">
+		<button class="first last" onclick="transition('Hour')">Hour
+		</button>
+		<button class="first last" onclick="transition('Day')">Day</button>
+		<button class="first last" onclick="transition('Few Days')">
+			Few Days</button>
+		<button class="first last" onclick="transition('Week')">Week
+		</button>
+		<button class="first last" onclick="transition('Month')">
+			Month</button>
+		<button class="first last" onclick="update()">Update</button>
+	</div>
+	<script type="text/javascript" src="gantt-chart-d3.js"></script>
+	<script type="text/javascript" src="example.js"></script>
+</body>
 </html>
