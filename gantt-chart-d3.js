@@ -1,38 +1,20 @@
 d3.gantt = function() {
     
-    margin = {
-	top : 40,
+    var margin = {
+	top : 35,
 	right : 40,
-	bottom : 30,
+	bottom : 35,
 	left : 150
     };
-    timeDomainStart = d3.time.day.offset(new Date(), -4);
-    timeDomainEnd = d3.time.hour.offset(new Date(), 3);
-    timeDomainMode = "fixed";// fixed or data
-    taskTypes = [];
-    height = 600;
-    width = 800;
-    
-    x = d3.time.scale()
-    .domain([ timeDomainStart, timeDomainEnd ])
-    .range([ 0, width])
-    .clamp(true);
+    var timeDomainStart = d3.time.day.offset(new Date(), -4);
+    var timeDomainEnd = d3.time.hour.offset(new Date(), 3);
+    var timeDomainMode = "fixed";// fixed or data
+    var taskTypes = [];
+    var taskStatus = [];
+    var height = document.body.clientHeight - margin.top - margin.bottom;
+    var width = document.body.clientWidth - margin.right - margin.left;
 
-    y = d3.scale.ordinal()
-    .domain(taskTypes)
-    .rangeRoundBands([ 0, height - margin.top - margin.bottom ], .1);
-
-    tickFormat = '%H:%M';
-    
-    xAxis = d3.svg.axis().scale(x)
-    .orient('bottom')
-    .ticks(d3.time.hours, 1)
-    .tickFormat(d3.time.format(tickFormat))
-    .tickSize(8)
-    .tickPadding(8);
-   
-    yAxis = d3.svg.axis().scale(y)
-    .orient("left").tickSize(0);
+    var tickFormat = '%H:%M';
     
     function gantt(tasks) {
 	
@@ -45,23 +27,23 @@ d3.gantt = function() {
 	});
 	var minDate = tasks[0].startDate;
 	
-	x = d3.time.scale()
+	var x = d3.time.scale()
 	.domain([ minDate, maxDate ])
 	.range([ 0, width])
 	.clamp(true);
 	
-	y = d3.scale.ordinal()
+	var y = d3.scale.ordinal()
 	.domain(taskTypes)
 	.rangeRoundBands([ 0, height - margin.top - margin.bottom ], .1);
 	
-	xAxis = d3.svg.axis().scale(x)
+	var xAxis = d3.svg.axis().scale(x)
 	.orient('bottom')
 	.ticks(d3.time.hours, 1)
 	.tickFormat(d3.time.format(tickFormat))
 	.tickSize(8)
 	.tickPadding(8);
 	   
-	yAxis = d3.svg.axis().scale(y)
+	var yAxis = d3.svg.axis().scale(y)
 	.orient("left").tickSize(0);	
 	
 	var svg = d3.select('body')
@@ -77,7 +59,12 @@ d3.gantt = function() {
 	 var chart = svg.selectAll('.chart')
 	 .data(tasks).enter()
 	 .append('rect')
-	 .attr('class', 'bar') 
+	 .attr("rx", 5)
+         .attr("ry", 5)
+	 .attr('class', function(d){ 
+	     if(taskStatus[d.status] == null){ return 'bar';}
+	     return taskStatus[d.status];
+	     }) 
 	 .attr("y", 0)
 	 .attr("transform", function(d) { return "translate(" + x(d.startDate) + "," + y(d.taskName) + ")"; })
 	 .attr('height', function(d) { return y.rangeBand(); })
@@ -94,45 +81,52 @@ d3.gantt = function() {
     };
     
     
-    gantt.margin = function(_) {
+    gantt.margin = function(value) {
 	if (!arguments.length)
 	    return margin;
-	margin = +_;
+	margin = +value;
 	return gantt;
     };
 
-    gantt.timeDomain = function(_) {
+    gantt.timeDomain = function(value) {
 	if (!arguments.length)
 	    return [ timeDomainStart, timeDomainEnd ];
-	timeDomainStart = +_[0], timeDomainEnd = +_[1];
+	timeDomainStart = +value[0], timeDomainEnd = +value[1];
 	return gantt;
     };
 
-    gantt.taskTypes = function(_) {
+    gantt.taskTypes = function(value) {
 	if (!arguments.length)
 	    return taskTypes;
-	taskTypes = _;
+	taskTypes = value;
+	return gantt;
+    };
+    
+    gantt.taskStatus = function(value) {
+	if (!arguments.length)
+	    return taskStatus;
+	taskStatus = value;
 	return gantt;
     };
 
-    gantt.width = function(_) {
+    gantt.width = function(value) {
 	if (!arguments.length)
 	    return width;
-	width = +_;
+	width = +value;
 	return gantt;
     };
 
-    gantt.height = function(_) {
+    gantt.height = function(value) {
 	if (!arguments.length)
 	    return height;
-	height = +_;
+	height = +value;
 	return gantt;
     };
 
-    gantt.tickFormat = function(_) {
+    gantt.tickFormat = function(value) {
 	if (!arguments.length)
 	    return tickFormat;
-	tickFormat = _;
+	tickFormat = value;
 	return gantt;
     };
     

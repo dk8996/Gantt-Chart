@@ -1,3 +1,8 @@
+   html,body,#wrapper {
+	width: 100%;
+	height: 100%;
+	margin:  0px;
+  }
   .chart {
     font-family: Arial, sans-serif;
     font-size: 12px;
@@ -12,6 +17,22 @@
   .bar {
     fill: #33b5e5;
   }
+  
+  .bar-failed {
+    fill: #CC0000;
+  }
+  
+  .bar-running {
+    fill: #669900;
+  }
+  
+  .bar-succeeded {
+    fill: #33b5e5;
+  }
+  .bar-killed {
+    fill: #ffbb33;
+  }
+
 
   .bar-highlighted {
     fill: #33b5e5;
@@ -28,6 +49,11 @@
   .task-guidelines {
     stroke: #0099cc;
   }
+
+.control {
+  	width: 50%;
+  	margin: 5px;
+}
 
 button {
   font: 14px Helvetica Neue;
