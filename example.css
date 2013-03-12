@@ -1,0 +1,35 @@
+   html,body,#wrapper {
+	width: 100%;
+	height: 100%;
+	margin:  0px;
+  }
+  .chart {
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+  }
+
+  .axis path, .axis line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+  }
+
+  .bar {
+    fill: #33b5e5;
+  }
+  
+  .bar-failed {
+    fill: #CC0000;
+  }
+  
+  .bar-running {
+    fill: #669900;
+  }
+  
+  .bar-succeeded {
+    fill: #33b5e5;
+  }
+  .bar-killed {
+    fill: #ffbb33;
+  }
+
