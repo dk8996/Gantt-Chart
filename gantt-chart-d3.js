@@ -1,34 +1,36 @@
 d3.gantt = function() {
     
     var margin = {
-	top : 35,
+	top : 20,
 	right : 40,
-	bottom : 35,
+	bottom : 20,
 	left : 150
     };
     var timeDomainStart = d3.time.day.offset(new Date(), -4);
     var timeDomainEnd = d3.time.hour.offset(new Date(), 3);
-    var timeDomainMode = "fixed";// fixed or data
+    var timeDomainMode = "fit";// fixed or fit
     var taskTypes = [];
     var taskStatus = [];
-    var height = document.body.clientHeight - margin.top - margin.bottom;
-    var width = document.body.clientWidth - margin.right - margin.left;
+    var height = document.body.clientHeight - margin.top - margin.bottom-5;
+    var width = document.body.clientWidth - margin.right - margin.left-5;
 
     var tickFormat = '%H:%M';
     
     function gantt(tasks) {
 	
-	tasks.sort(function(a, b) {
-	    return a.endDate - b.endDate;
-	});
-	var maxDate = tasks[tasks.length - 1].endDate;
-	tasks.sort(function(a, b) {
-	    return a.startDate - b.startDate;
-	});
-	var minDate = tasks[0].startDate;
+	if(timeDomainMode === "fit"){
+    	    tasks.sort(function(a, b) {
+		return a.endDate - b.endDate;
+	    });
+	     timeDomainEnd = tasks[tasks.length - 1].endDate;
+	    tasks.sort(function(a, b) {
+		return a.startDate - b.startDate;
+	    });
+	     timeDomainStart = tasks[0].startDate;
+	}
 	
 	var x = d3.time.scale()
-	.domain([ minDate, maxDate ])
+	.domain([ timeDomainStart, timeDomainEnd ])
 	.range([ 0, width])
 	.clamp(true);
 	
@@ -42,6 +44,7 @@ d3.gantt = function() {
 	.tickFormat(d3.time.format(tickFormat))
 	.tickSize(8)
 	.tickPadding(8);
+
 	   
 	var yAxis = d3.svg.axis().scale(y)
 	.orient("left").tickSize(0);	
@@ -76,8 +79,9 @@ d3.gantt = function() {
 	 .attr('class', 'x axis')
 	 .attr('transform', 'translate(0, ' + (height - margin.top - margin.bottom) + ')')
 	 .call(xAxis);
-
+	 
 	 svg.append('g').attr('class', 'y axis').call(yAxis);
+
     };
     
     
