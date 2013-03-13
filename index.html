@@ -33,16 +33,96 @@
       <section id="main_content" class="inner">
         <h2>Getting Started</h2>
 
-<p>var gantt = d3.gantt().width(900).taskTypes(taskNames);
-gantt(tasks);</p>
+<h3>Data</h3>
+
+<p>Create a array of all your data.</p>
+
+<div class="highlight"><pre><span class="kd">var</span> <span class="nx">tasks</span> <span class="o">=</span> <span class="p">[</span>
+
+<span class="p">{</span>
+    <span class="s2">"startDate"</span><span class="o">:</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="s2">"Sun Dec 09 01:36:45 EST 2012"</span><span class="p">),</span>
+    <span class="s2">"endDate"</span><span class="o">:</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="s2">"Sun Dec 09 02:36:45 EST 2012"</span><span class="p">),</span>
+    <span class="s2">"taskName"</span><span class="o">:</span> <span class="s2">"E Job"</span><span class="p">,</span>
+    <span class="s2">"status"</span><span class="o">:</span> <span class="s2">"FAILED"</span>
+<span class="p">},</span>
+
+<span class="p">{</span>
+    <span class="s2">"startDate"</span><span class="o">:</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="s2">"Sun Dec 09 04:56:32 EST 2012"</span><span class="p">),</span>
+    <span class="s2">"endDate"</span><span class="o">:</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="s2">"Sun Dec 09 06:35:47 EST 2012"</span><span class="p">),</span>
+    <span class="s2">"taskName"</span><span class="o">:</span> <span class="s2">"A Job"</span><span class="p">,</span>
+    <span class="s2">"status"</span><span class="o">:</span> <span class="s2">"RUNNING"</span>
+<span class="p">}];</span>
+
+</pre></div>
+
+<h3>Style</h3>
+
+<p>Create a map between task status and css class, this is optional.</p>
+
+<div class="highlight"><pre><span class="kd">var</span> <span class="nx">taskStatus</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">"SUCCEEDED"</span><span class="o">:</span> <span class="s2">"bar"</span><span class="p">,</span>
+    <span class="s2">"FAILED"</span><span class="o">:</span> <span class="s2">"bar-failed"</span><span class="p">,</span>
+    <span class="s2">"RUNNING"</span><span class="o">:</span> <span class="s2">"bar-running"</span><span class="p">,</span>
+    <span class="s2">"KILLED"</span><span class="o">:</span> <span class="s2">"bar-killed"</span>
+<span class="p">};</span>
+</pre></div>
+
+<div class="highlight"><pre>  <span class="nc">.bar</span> <span class="p">{</span>
+      <span class="n">fill</span><span class="o">:</span> <span class="m">#33b5e5</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="nc">.bar-failed</span> <span class="p">{</span>
+    <span class="n">fill</span><span class="o">:</span> <span class="m">#CC0000</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="nc">.bar-running</span> <span class="p">{</span>
+      <span class="n">fill</span><span class="o">:</span> <span class="m">#669900</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="nc">.bar-succeeded</span> <span class="p">{</span>
+    <span class="n">fill</span><span class="o">:</span> <span class="m">#33b5e5</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="nc">.bar-killed</span> <span class="p">{</span>
+      <span class="n">fill</span><span class="o">:</span> <span class="m">#ffbb33</span><span class="p">;</span>
+  <span class="p">}</span>
+</pre></div>
+
+<h3>Task Names</h3>
+
+<p>Create a array of task names, they will be display on they y-axis in the order given to the array.</p>
+
+<div class="highlight"><pre><span class="kd">var</span> <span class="nx">taskNames</span> <span class="o">=</span> <span class="p">[</span> <span class="s2">"D Job"</span><span class="p">,</span> <span class="s2">"P Job"</span><span class="p">,</span> <span class="s2">"E Job"</span><span class="p">,</span> <span class="s2">"A Job"</span><span class="p">,</span> <span class="s2">"N Job"</span> <span class="p">];</span>
+</pre></div>
+
+<h3>Create a Simple Gantt-Chart</h3>
+
+<p>Create a simple Gantt-Chart</p>
+
+<div class="highlight"><pre><span class="kd">var</span> <span class="nx">gantt</span> <span class="o">=</span> <span class="nx">d3</span><span class="p">.</span><span class="nx">gantt</span><span class="p">().</span><span class="nx">taskTypes</span><span class="p">(</span><span class="nx">taskNames</span><span class="p">).</span><span class="nx">taskStatus</span><span class="p">(</span><span class="nx">taskStatus</span><span class="p">);</span>
+<span class="nx">gantt</span><span class="p">(</span><span class="nx">tasks</span><span class="p">);</span>
+</pre></div>
 
 <h2>Dependencies &amp; Building</h2>
 
 <p>Relies on the fantastic <a href="http://mbostock.github.com/d3/">D3 visualization library</a> to do lots of the heavy lifting for stacking and rendering to SVG.</p>
 
-<h2>Authors and Contributors</h2>
+<h2>License</h2>
 
-<p>Dimitry Kudryavtsev</p>
+<p>Copyright 2012 Dimitry Kudryavtsev</p>
+
+<p>Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at</p>
+
+<pre><code>   http://www.apache.org/licenses/LICENSE-2.0
+</code></pre>
+
+<p>Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.</p>
       </section>
     </div>
 
@@ -54,7 +134,17 @@ gantt(tasks);</p>
       </footer>
     </div>
 
-    
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-39251514-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
 
   </body>
 </html>
