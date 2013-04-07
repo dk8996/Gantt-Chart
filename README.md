@@ -1,5 +1,7 @@
 ## Introduction
+A basic implementation of a Gantt Chart using D3.js. 
 
+![screenshot](https://raw.github.com/dk8996/Gantt-Chart/master/examples/screenshot1.png)
 
 ## Getting Started
 ### Data
