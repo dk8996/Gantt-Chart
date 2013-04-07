@@ -1,6 +1,6 @@
 ## Introduction
 
-![screenshot](https://github.com/dk8996/Gantt-Chart/blob/master/examples/screenshot1.png)
+![screenshot](https://raw.github.com/dk8996/Gantt-Chart/master/examples/screenshot1.png)
 
 ## Getting Started
 ### Data
