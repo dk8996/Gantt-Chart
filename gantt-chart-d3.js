@@ -1,3 +1,8 @@
+/**
+ * @author Dimitry Kudrayvtsev
+ * @version 1.0
+ */
+
 d3.gantt = function() {
     
     var margin = {
@@ -6,8 +11,8 @@ d3.gantt = function() {
 	bottom : 20,
 	left : 150
     };
-    var timeDomainStart = d3.time.day.offset(new Date(), -4);
-    var timeDomainEnd = d3.time.hour.offset(new Date(), 3);
+    var timeDomainStart = d3.time.day.offset(new Date(),-3);
+    var timeDomainEnd = d3.time.hour.offset(new Date(),+3);
     var timeDomainMode = "fit";// fixed or fit
     var taskTypes = [];
     var taskStatus = [];
@@ -99,6 +104,19 @@ d3.gantt = function() {
 	return gantt;
     };
 
+    /**
+     * @param {string}
+     *                vale The value can be "fit" - the domain fits the data or
+     *                "fixed" - fixed domain.
+     */
+    gantt.timeDomainMode = function(value) {
+	if (!arguments.length)
+	    return timeDomainMode;
+        timeDomainMode = value;
+        return gantt;
+
+    };
+
     gantt.taskTypes = function(value) {
 	if (!arguments.length)
 	    return taskTypes;
@@ -133,6 +151,8 @@ d3.gantt = function() {
 	tickFormat = value;
 	return gantt;
     };
+
+
     
     return gantt;
 };

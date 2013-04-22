@@ -45,6 +45,6 @@ var minDate = tasks[0].startDate;
 
 var format = "%H:%M";
 
-var gantt = d3.gantt().taskTypes(taskNames).taskStatus(taskStatus).tickFormat(format);;
+var gantt = d3.gantt().taskTypes(taskNames).taskStatus(taskStatus).tickFormat(format);
 gantt(tasks);
 
