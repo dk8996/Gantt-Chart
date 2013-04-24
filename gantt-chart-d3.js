@@ -1,6 +1,6 @@
 /**
  * @author Dimitry Kudrayvtsev
- * @version 1.0
+ * @version 2.0
  */
 
 d3.gantt = function() {
