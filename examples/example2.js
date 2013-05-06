@@ -29,7 +29,7 @@ gantt(tasks);
 
 function addTask() {
     
-    var lastEndDate = gantt.timeDomainEnd;
+    var lastEndDate = Date.now();
     if (tasks.length > 0) {
 	lastEndDate = tasks[tasks.length - 1].endDate;
     }
