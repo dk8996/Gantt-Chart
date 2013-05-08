@@ -156,7 +156,7 @@ d3.gantt = function() {
     gantt.margin = function(value) {
 	if (!arguments.length)
 	    return margin;
-	margin = +value;
+	margin = value;
 	return gantt;
     };
 
