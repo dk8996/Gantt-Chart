@@ -1,3 +1,6 @@
+example();
+function example() {
+
 var tasks = [
 {"startDate":new Date("Sun Dec 09 01:36:45 EST 2012"),"endDate":new Date("Sun Dec 09 02:36:45 EST 2012"),"taskName":"E Job","status":"RUNNING"}];
 
@@ -27,7 +30,7 @@ var gantt = d3.gantt().taskTypes(taskNames).taskStatus(taskStatus).tickFormat(fo
 gantt(tasks);
 
 
-function addTask() {
+example.addTask = function() {
     
     var lastEndDate = Date.now();
     if (tasks.length > 0) {
@@ -42,7 +45,9 @@ function addTask() {
     gantt.redraw(tasks);
 };
 
-function removeTask() {
+example.removeTask = function() {
     tasks.pop();
     gantt.redraw(tasks);
+};
+
 };

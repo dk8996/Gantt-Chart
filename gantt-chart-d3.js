@@ -1,6 +1,6 @@
 /**
  * @author Dimitry Kudrayvtsev
- * @version 2.0
+ * @version 2.1
  */
 
 d3.gantt = function() {
@@ -40,7 +40,7 @@ d3.gantt = function() {
 
     var yAxis = d3.svg.axis().scale(y).orient("left").tickSize(0);
 
-    var initTimeDomain = function() {
+    var initTimeDomain = function(tasks) {
 	if (timeDomainMode === FIT_TIME_DOMAIN_MODE) {
 	    if (tasks === undefined || tasks.length < 1) {
 		timeDomainStart = d3.time.day.offset(new Date(), -3);
@@ -69,7 +69,7 @@ d3.gantt = function() {
     
     function gantt(tasks) {
 	
-	initTimeDomain();
+	initTimeDomain(tasks);
 	initAxis();
 	
 	var svg = d3.select("body")
@@ -114,7 +114,7 @@ d3.gantt = function() {
     
     gantt.redraw = function(tasks) {
 
-	initTimeDomain();
+	initTimeDomain(tasks);
 	initAxis();
 	
         var svg = d3.select("svg");
