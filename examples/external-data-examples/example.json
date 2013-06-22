@@ -1,0 +1,54 @@
+[
+{ "name" : "Joe Johnson"
+, "values": [
+{
+"from date": "jan-2000"
+, "to date": "jun-2002"
+, "Role": "VP of Product"
+, "Company": "A Company"
+
+},
+{
+"from date": "jun-2002"
+, "to date": "apr-2004"
+, "Role": "CEO"
+, "Company": "B Company"
+
+}
+,
+{
+"from date": "apr-2004"
+, "to date": "jun-2013"
+, "Role": "CEO"
+, "Company": "C Company"
+
+}]
+},
+
+{ "name" : "Bill Johnson"
+, "values": [
+{
+"from date": "jan-2001"
+, "to date": "jun-2005"
+, "Role": "VP of Product"
+, "Company": "C Company"
+
+},
+{
+"from date": "jun-2005"
+, "to date": "july-2006"
+, "Role": "CEO"
+, "Company": "D Company"
+
+}
+,
+{
+"from date": "july-2006"
+, "to date": "jun-2013"
+, "Role": "CEO"
+, "Company": "A Company"
+
+}]
+}
+
+]
