@@ -24,6 +24,13 @@ var timeDomainString = "1day";
 
 var gantt = d3.gantt().taskTypes(taskNames).taskStatus(taskStatus).tickFormat(format);
 
+var margin = {
+     top : 20,
+     right : 40,
+     bottom : 20,
+     left : 80
+};
+gantt.margin(margin);
 
 gantt.timeDomainMode("fixed");
 changeTimeDomain(timeDomainString);
