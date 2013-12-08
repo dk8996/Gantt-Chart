@@ -19,6 +19,7 @@ html,body,#wrapper {
 	fill: #33b5e5;
 }
 
+
 .bar-failed {
 	fill: #CC0000;
 }
@@ -33,6 +34,12 @@ html,body,#wrapper {
 
 .bar-killed {
 	fill: #ffbb33;
+}
+
+.brush .extent {
+  stroke: #fff;
+  fill-opacity: .125;
+  shape-rendering: crispEdges;
 }
 
 #forkme_banner {
