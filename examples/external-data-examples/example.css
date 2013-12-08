@@ -19,27 +19,20 @@ html,body,#wrapper {
 	fill: #33b5e5;
 }
 
-
-.bar-failed {
+.bar-red {
 	fill: #CC0000;
 }
 
-.bar-running {
+.bar-green {
 	fill: #669900;
 }
 
-.bar-succeeded {
+.bar-blue {
 	fill: #33b5e5;
 }
 
-.bar-killed {
+.bar-yellow {
 	fill: #ffbb33;
-}
-
-.brush .extent {
-  stroke: #fff;
-  fill-opacity: .125;
-  shape-rendering: crispEdges;
 }
 
 #forkme_banner {
