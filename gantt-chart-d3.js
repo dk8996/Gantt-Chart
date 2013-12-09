@@ -57,12 +57,11 @@ d3.gantt = function() {
     var initBrush = function(group,updateGroup) {
         
         var brushed = function() {
-	    gantt.timeDomainMode(FIXED_TIME_DOMAIN_MODE);
-	    gantt.timeDomain(brush.empty() ? miniX.domain() : brush.extent());
-	    gantt.initTimeDomain();
-        gantt.updateGroup.select(".x.axis").call(xAxis);
+	   x.domain(brush.empty() ? miniX.domain() : brush.extent());
+
+       updateGroup.select(".x.axis").call(xAxis);
 	    
-       var rect = ganttChartGroup.selectAll(".bar").data(tasks, keyFunction);
+       var rect = updateGroup.selectAll(".bar").data(tasks, keyFunction);
        rect.transition()
        .attr("transform", rectTransform)
 	   .attr("height", function(d) { return y.rangeBand(); })
@@ -84,8 +83,9 @@ d3.gantt = function() {
         .attr("y", -6)
         .attr("height", miniHeight);
         
-    }
+    };
 
+    var initTimeDomain = function(tasks) {
 	if (timeDomainMode === FIT_TIME_DOMAIN_MODE) {
 	    if (tasks === undefined || tasks.length < 1) {
 		timeDomainStart = d3.time.day.offset(new Date(), -3);
@@ -185,7 +185,7 @@ d3.gantt = function() {
 
       miniGanttChartGroup.append("g").attr("class", "y axis").transition().call(miniYAxis);
 
-      initBrush(miniGanttChartGroup, ganttChartGroup)
+      initBrush(miniGanttChartGroup, ganttChartGroup);
 
       return gantt;
 
@@ -256,6 +256,8 @@ d3.gantt = function() {
 	     });
       
         miniRect.exit().remove();
+        initBrush(miniGanttChartGroup, ganttChartGroup);
+
 	
 	return gantt;
     };
