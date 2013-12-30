@@ -52,27 +52,29 @@ d3.gantt = function() {
     
 
     var miniYAxis = d3.svg.axis().scale(miniY).orient("left").tickSize(0);
+	
 
+    var brush = d3.svg.brush();
 
     var initBrush = function(group,updateGroup) {
         
         var brushed = function() {
 	   x.domain(brush.empty() ? miniX.domain() : brush.extent());
 
-       updateGroup.select(".x.axis").call(xAxis);
+           gantt.timeDomain(brush.extent());
+           gantt.redrawMain(tasks);
+           //updateGroup.select(".x.axis").call(xAxis);
 	    
-       var rect = updateGroup.selectAll(".bar").data(tasks, keyFunction);
-       rect.transition()
-       .attr("transform", rectTransform)
-	   .attr("height", function(d) { return y.rangeBand(); })
-	   .attr("width", function(d) { 
-	     return (x(d.endDate) - x(d.startDate)); 
-	     });
-            // focus.select("path").attr("d", area);
-           
+       //var rect = updateGroup.selectAll(".bar").data(tasks, keyFunction);
+       //rect.transition()
+       //.attr("transform", rectTransform)
+       //   .attr("height", function(d) { return y.rangeBand(); })
+	//   .attr("width", function(d) { 
+	//     return (x(d.endDate) - x(d.startDate)); 
+	 //    }); 
         }
         
-        var brush = d3.svg.brush()
+        brush
         .x(miniX)
         .on("brush", brushed);
 
@@ -84,6 +86,7 @@ d3.gantt = function() {
         .attr("height", miniHeight);
         
     };
+  
 
     var initTimeDomain = function(tasks) {
 	if (timeDomainMode === FIT_TIME_DOMAIN_MODE) {
@@ -103,24 +106,29 @@ d3.gantt = function() {
 	}
     };
 
+    var initAxisMini = function() {
+	miniY = d3.scale.ordinal().domain(taskTypes).rangeRoundBands([ 0, miniHeight ], .1);
+	miniX = d3.time.scale().domain([ timeDomainStart, timeDomainEnd ]).range([ 0, width ]).clamp(true);
+
+	miniYAxis = d3.svg.axis().scale(miniY).orient("left").tickSize(0);
+    };
+
     var initAxis = function() {
 	x = d3.time.scale().domain([ timeDomainStart, timeDomainEnd ]).range([ 0, width ]).clamp(true);
 	y = d3.scale.ordinal().domain(taskTypes).rangeRoundBands([ 0, height - margin.top - margin.bottom ], .1);
-	miniY = d3.scale.ordinal().domain(taskTypes).rangeRoundBands([ 0, miniHeight ], .1);
-	miniX = d3.time.scale().domain([ timeDomainStart, timeDomainEnd ]).range([ 0, width ]).clamp(true);
-	
+
 	xAxis = d3.svg.axis().scale(x).orient("bottom").tickFormat(d3.time.format(tickFormat)).tickSubdivide(true)
 		.tickSize(8).tickPadding(8);
 
 	yAxis = d3.svg.axis().scale(y).orient("left").tickSize(0);
 	
-	miniYAxis = d3.svg.axis().scale(miniY).orient("left").tickSize(0);
     };
     
     function gantt(tasks) {
 	
 	initTimeDomain(tasks);
 	initAxis();
+        initAxisMini();
 	
 	var body = d3.select("body")
 	.append("svg")
@@ -191,9 +199,52 @@ d3.gantt = function() {
 
     };
     
-    gantt.redraw = function(tasks) {
+    gantt.redrawMini = function(tasks) {
+        initAxisMini();
 
+        var svg = d3.select("svg");
+	svg.select(".x").transition().call(xAxis);
+	svg.select(".y").transition().call(yAxis);
+	
+        var miniGanttChartGroup = svg.select(".mini-gantt-chart");
+        var miniRect = miniGanttChartGroup.selectAll(".bar").data(tasks, keyFunction);
+	
+        miniRect.enter()
+        .insert("rect",":first-child")
+        .attr("rx", 5)
+        .attr("ry", 5)
+	.attr("class", function(d){ 
+	     if(taskStatus[d.status] == null){ return "bar";}
+	     return "bar " + taskStatus[d.status];
+	     }) 
+	 .transition()
+	 .attr("y", 0)
+	 .attr("transform", miniRectTransform)
+	 .attr("height", function(d) { return miniY.rangeBand(); })
+	 .attr("width", function(d) { 
+	     return (x(d.endDate) - x(d.startDate)); 
+	     });
+        
+        miniRect.transition()
+        .attr("transform", miniRectTransform)
+	 .attr("height", function(d) { return miniY.rangeBand(); })
+	 .attr("width", function(d) { 
+	     return (x(d.endDate) - x(d.startDate)); 
+	     });
+      
+        miniRect.exit().remove();
+        brush.x(miniX);	
+	return gantt;
+    };
+	
+    gantt.redraw = function(tasks) {
 	initTimeDomain(tasks);
+        gantt.redrawMain(tasks).redrawMini(tasks);
+	return gantt;
+    }
+
+    gantt.redrawMain = function(tasks) {
+
 	initAxis();
 	
         var svg = d3.select("svg");
@@ -225,39 +276,6 @@ d3.gantt = function() {
 	     });
         
 	rect.exit().remove();
-
-	svg.select(".x").transition().call(xAxis);
-	svg.select(".y").transition().call(yAxis);
-	
-        var miniGanttChartGroup = svg.select(".mini-gantt-chart");
-        var miniRect = miniGanttChartGroup.selectAll(".bar").data(tasks, keyFunction);
-	
-        miniRect.enter()
-        .insert("rect",":first-child")
-        .attr("rx", 5)
-        .attr("ry", 5)
-	.attr("class", function(d){ 
-	     if(taskStatus[d.status] == null){ return "bar";}
-	     return "bar " + taskStatus[d.status];
-	     }) 
-	 .transition()
-	 .attr("y", 0)
-	 .attr("transform", miniRectTransform)
-	 .attr("height", function(d) { return miniY.rangeBand(); })
-	 .attr("width", function(d) { 
-	     return (x(d.endDate) - x(d.startDate)); 
-	     });
-        
-        miniRect.transition()
-        .attr("transform", miniRectTransform)
-	 .attr("height", function(d) { return miniY.rangeBand(); })
-	 .attr("width", function(d) { 
-	     return (x(d.endDate) - x(d.startDate)); 
-	     });
-      
-        miniRect.exit().remove();
-        initBrush(miniGanttChartGroup, ganttChartGroup);
-
 	
 	return gantt;
     };

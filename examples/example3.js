@@ -23,13 +23,12 @@ var format = "%H:%M";
 var timeDomainString = "1day";
 
 var gantt = d3.gantt().taskTypes(taskNames).taskStatus(taskStatus).tickFormat(format);
-var gantt2 = d3.gantt().taskTypes(taskNames).taskStatus(taskStatus).tickFormat("%H:%M:%S");
 
 gantt.timeDomainMode("fixed");
 changeTimeDomain(timeDomainString);
 
 gantt(tasks);
-gantt2(tasks);
+
 
 function changeTimeDomain(timeDomainString) {
     this.timeDomainString = timeDomainString;
@@ -90,6 +89,7 @@ function addTask() {
 
     changeTimeDomain(timeDomainString);
     gantt.redraw(tasks);
+
 };
 
 function removeTask() {
