@@ -16,6 +16,10 @@ h1 {
 }
 
 /* zoom style */
+.zoom-rect {
+	fill: rgba(250, 250, 255, 0.6) !important;
+}
+
 .zoom-rect, text, line {
 	cursor: move;
 }
@@ -25,6 +29,10 @@ h1 {
 	stroke: #000;
 	shape-rendering: crispEdges;
 	cursor: move;
+}
+
+.blockLine {
+	stroke:black;
 }
 
 .y.axis line {
