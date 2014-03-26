@@ -115,9 +115,10 @@ d3.gantt = function () {
 		if (!currYAxis.empty()) {
 			var currFontHeight = parseInt(d3.select(".y.axis text").style("font-size"));
 			var newFontHeight = Math.round((height - margin.top - margin.bottom) / taskTypes.length) + 2;
-			if (newFontHeight < 20) { // do not display too big texts.
-				d3.selectAll(".y.axis text").style("font-size", newFontHeight);
+			if (newFontHeight > 25) { // do not display too big texts.
+				newFontHeight = 25;
 			}
+			d3.selectAll(".y.axis text").style("font-size", newFontHeight);
 		}
 	}
 	
