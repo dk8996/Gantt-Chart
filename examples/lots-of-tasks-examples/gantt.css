@@ -1,0 +1,82 @@
+html,body,#wrapper {
+	width: 100%;
+	height: 100%;
+	margin: 0px;
+	padding: 0px;
+}
+
+h1 {
+	text-align:center;
+	margin: 0px;
+}
+
+.chart {
+	font-family: Arial, sans-serif;
+	font-size: 12px;
+}
+
+/* zoom style */
+.zoom-rect {
+	fill: rgba(250, 250, 255, 0.6) !important;
+}
+
+.zoom-rect, text, line {
+	cursor: move;
+}
+
+.axis path, .axis line {
+	fill: none;
+	stroke: #000;
+	shape-rendering: crispEdges;
+	cursor: move;
+}
+
+.blockLine {
+	stroke:black;
+}
+
+.y.axis line {
+	fill: none;
+	stroke: grey;
+	stroke-opacity: 0.2;
+	stroke-dasharray: 3, 6;
+	shape-rendering: crispEdges;
+}
+
+.bar {
+	fill: #669900;
+	stroke-width:1;
+	stroke:black;
+}
+
+.bar-failed {
+	fill: #CC0000;
+	stroke-width:1;
+	stroke:black;
+}
+
+.eoj {
+	color: #669900;
+}
+
+.end {
+	color: #CC0000;
+}
+
+.d3-tip {
+  line-height: 1;
+  font-weight: bold;
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  border-radius: 2px;
+}
+
+#menu {
+	position: fixed;
+	right: 5px;
+	top: -1px;
+	padding:5px;
+	border:solid black 1px;
+	border-radius:5px;
+}

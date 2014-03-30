@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Synthesis gantt</title>
+<link type="text/css" href="./gantt.css" rel="stylesheet" />
+</head>
+<body>
+<h1>Synthesis of all jobs run</h1>
+
+<div id="menu">
+<form>
+	Filtre : <input id="filterName" type="text" size="5" title="Filtrage sur le nom des tâches, par exemple B*" onkeyup="filterTasks()" /> &nbsp;&nbsp;
+	<input type="button" name="RAZ" value="RAZ" title="Efface les filtres" onclick="razFilter()"><br/>
+	<input id="cbeoj" type="checkbox" name="eoj" onclick="filterTasks()" checked /><span class="eoj">EOJ</span> &nbsp; 
+	<input id="cbend" type="checkbox" name="end" onclick="filterTasks()" checked /><span class="end">END</span> &nbsp;
+</form>
+</div>
+
+<script type="text/javascript" src="../../lib/d3/d3.v3.min.js"></script>
+<script type="text/javascript" src="./d3.tip.v0.6.3.js"></script>
+<script type="text/javascript" src="../../gantt-chart-d3.js"></script>
+<script type="text/javascript" src="./gantt-data.js"></script>
+<script type="text/javascript" src="./gantt.js"></script>
+</body>
+</html>
