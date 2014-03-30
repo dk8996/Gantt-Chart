@@ -30,7 +30,7 @@ d3.gantt = function () {
 	
 	var tickFormat = "%H:%M";
 
-	var tip;
+	var tipBar, tipYAxis;
 	// Vars initialized via initAxis function.
 	var x;
 	var y;
@@ -122,7 +122,7 @@ d3.gantt = function () {
 			.orient("left")
 			.tickSize(tickSizeWidth);
 	};
-	
+		
 	var updateFontSizeYAxis = function() {
 		//compute the height of the font for the yAxis (necessary for lots of values).
 		var currYAxis = d3.select(".y.axis text");
@@ -132,21 +132,46 @@ d3.gantt = function () {
 			if (newFontHeight > 25) { // do not display too big texts.
 				newFontHeight = 25;
 			}
-			d3.selectAll(".y.axis text").style("font-size", newFontHeight);
+			d3.selectAll(".y.axis text").style("font-size", newFontHeight + "px");
+			
+			//Adds a tip if font size is quite small.
+			if (newFontHeight < 12) {
+				d3.selectAll(".y.axis text")
+					.on('mouseover', tipYAxis.show)
+					.on('mouseout', tipYAxis.hide);
+			} else {
+				d3.selectAll(".y.axis text")
+					.on('mouseover', null)
+					.on('mouseout', null);
+			}
+			
 		}
 	}
 	
 	var initTip = function(selection) {
 		if (d3.tip) {
-			tip = d3.tip()
+			//tip on bars.
+			tipBar = d3.tip()
 			  .attr('class', 'd3-tip')
 			  .offset([10, 0])
 			  .direction("s")
 			  .html(tipFunction);
-			selection.call(tip);
-		} else {
+			selection.call(tipBar);
+			
+			//tip on y axis.
+			tipYAxis=d3.tip().attr('class', 'd3-tip')
+				.offset([10, 0])
+				.direction("s")
+				.html(function(d) { return d; })
+			selection.call(tipYAxis);
+		} else { //d3.tip not present.
 			//fake a tip implementation that does nothing.
-			tip = function() {
+			tipBar = function() {
+				show = function() {};
+				hide = function() {};
+			};
+			
+			tipYAxis=function() {
 				show = function() {};
 				hide = function() {};
 			};
@@ -219,8 +244,8 @@ d3.gantt = function () {
 		//adds the usefull content : rectangles for each task.
 		var rectGroup = ganttChartGroup.append("g").attr("clip-path","url(#clipID)").attr("class", "rect-group");
 		//right and left lines of the gantt.
-		rectGroup.append("line").attr("id", "rightLine").attr("class", "blockLine").attr("x1", width).attr("y1", 0).attr("x2", width).attr("y2", height - margin.top - margin.bottom);
-		rectGroup.append("line").attr("id", "leftLine").attr("class", "blockLine").attr("x1", 0).attr("y1", 0).attr("x2", 0).attr("y2", height - margin.top - margin.bottom);
+		rectGroup.append("line").attr("id", "rightLine").attr("class", "blockLine").attr("x1", width + 5).attr("y1", 0).attr("x2", width + 5).attr("y2", height - margin.top - margin.bottom);
+		rectGroup.append("line").attr("id", "leftLine").attr("class", "blockLine").attr("x1", -5).attr("y1", 0).attr("x2", -5).attr("y2", height - margin.top - margin.bottom);
 		
 		rectGroup.selectAll(".chart")
 			.data(tasks, keyFunction).enter()
@@ -241,8 +266,8 @@ d3.gantt = function () {
 			.attr("width", function (d) {
 				return (x(d.endDate) - x(d.startDate));
 			})
-			.on('mouseover', tip.show)
-			.on('mouseout', tip.hide)
+			.on('mouseover', tipBar.show)
+			.on('mouseout', tipBar.hide)
 			.on('click', clickFunction)
 			.style("cursor", function() {
 				if (clickFunctionOverriden) {
@@ -317,8 +342,8 @@ d3.gantt = function () {
 				}
 				return taskStatus[d.status];
 			})
-			.on('mouseover', tip.show)
-			.on('mouseout', tip.hide)
+			.on('mouseover', tipBar.show)
+			.on('mouseout', tipBar.hide)
 			.on('click', clickFunction)
 			.style("cursor", function() {
 				if (clickFunctionOverriden) {
