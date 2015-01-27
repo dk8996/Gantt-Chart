@@ -3,8 +3,8 @@ A basic implementation of a Gantt Chart using D3.js. Here is a example [Example 
 
 ![screenshot](https://raw.github.com/dk8996/Gantt-Chart/master/examples/screenshot1.png)
 
-### External Data Example
-Here is a [example] (http://static.mentful.com/d3ganttchart/example.html) of loading external data into the Gantt Chart, you need to watch out for [cross-domain restrictions] (http://en.wikipedia.org/wiki/Same-origin_policy). 
+#### External Data Example
+Here is a [example] (http://static.mentful.com/d3ganttchart/example.html) of loading external data, in JSON format, into the Gantt Chart, you need to watch out for [cross-domain restrictions] (http://en.wikipedia.org/wiki/Same-origin_policy). 
 
 ## Getting Started
 ### Data
