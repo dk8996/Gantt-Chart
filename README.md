@@ -12,19 +12,20 @@ Create a array of all your data.
 
 ```javascript
 var tasks = [
-
 {
     "startDate": new Date("Sun Dec 09 01:36:45 EST 2012"),
     "endDate": new Date("Sun Dec 09 02:36:45 EST 2012"),
     "taskName": "E Job",
-    "status": "FAILED"
+    "status": "FAILED",
+    "title": "Text content of task 1"
 },
 
 {
     "startDate": new Date("Sun Dec 09 04:56:32 EST 2012"),
     "endDate": new Date("Sun Dec 09 06:35:47 EST 2012"),
     "taskName": "A Job",
-    "status": "RUNNING"
+    "status": "RUNNING",
+    "title": "Text content of task 2"
 }];
 
 ```
