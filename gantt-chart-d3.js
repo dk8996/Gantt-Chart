@@ -42,7 +42,7 @@ d3.gantt = function() {
         return d.title;
     }
 
-    var initTimeDomain = function() {
+    var initTimeDomain = function(tasks) {
         if (timeDomainMode === FIT_TIME_DOMAIN_MODE) {
             if (tasks === undefined || tasks.length < 1) {
                 timeDomainStart = d3.time.day.offset(new Date(), -3);
@@ -91,7 +91,7 @@ d3.gantt = function() {
     initAxis();
 
     function gantt(tasks) {
-        initTimeDomain();
+        initTimeDomain(tasks);
         initAxis();
 
         var svg = d3.select("#"+containerId)
@@ -150,7 +150,7 @@ d3.gantt = function() {
 
     gantt.redraw = function(tasks) {
 
-        initTimeDomain();
+        initTimeDomain(tasks);
         initAxis();
 
         var svg = d3.select("svg");
@@ -179,6 +179,15 @@ d3.gantt = function() {
         var gRect = gTasks.insert("rect",":first-child")
             .transition()
             .call(confRect);
+
+        //FIXME, code for redraw stuck blocks
+        svg.select(".gantt-chart")
+            .selectAll(".task")
+            .selectAll("*")
+            .data(tasks, keyFunction)
+            .exit()
+            .transition()
+            .attr('width', 0).remove();
 
         var gText = gTasks.append("text")
             .call(confText)
