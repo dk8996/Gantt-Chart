@@ -1,5 +1,6 @@
 var tasks = [
-{"startDate":new Date("Sun Dec 09 01:36:45 EST 2012"),"endDate":new Date("Sun Dec 09 02:36:45 EST 2012"),"taskName":"E Job","status":"RUNNING"}];
+    {"startDate": new Date("Sun Dec 09 01:36:45 EST 2012"), "endDate": new Date("Sun Dec 09 02:36:45 EST 2012"), "taskName": "E Job", "status": "RUNNING", title: "Text content of task"}
+];
 
 var taskStatus = {
     "SUCCEEDED" : "bar",
@@ -9,6 +10,8 @@ var taskStatus = {
 };
 
 var taskNames = [ "D Job", "P Job", "E Job", "A Job", "N Job" ];
+
+var taskTitles = ['Random text content of task 1', 'Random text content of task 2', 'Random text content of task 3', 'Random text content of task 4'];
 
 tasks.sort(function(a, b) {
     return a.endDate - b.endDate;
@@ -39,33 +42,35 @@ gantt(tasks);
 
 function changeTimeDomain(timeDomainString) {
     this.timeDomainString = timeDomainString;
+
     switch (timeDomainString) {
-    case "1hr":
-	format = "%H:%M:%S";
-	gantt.timeDomain([ d3.time.hour.offset(getEndDate(), -1), getEndDate() ]);
-	break;
-    case "3hr":
-	format = "%H:%M";
-	gantt.timeDomain([ d3.time.hour.offset(getEndDate(), -3), getEndDate() ]);
-	break;
 
-    case "6hr":
-	format = "%H:%M";
-	gantt.timeDomain([ d3.time.hour.offset(getEndDate(), -6), getEndDate() ]);
-	break;
+        case "1hr":
+            format = "%H:%M:%S";
+            gantt.timeDomain([ d3.time.hour.offset(getEndDate(), -1), getEndDate() ]);
+        break;
 
-    case "1day":
-	format = "%H:%M";
-	gantt.timeDomain([ d3.time.day.offset(getEndDate(), -1), getEndDate() ]);
-	break;
+        case "3hr":
+            format = "%H:%M";
+            gantt.timeDomain([ d3.time.hour.offset(getEndDate(), -3), getEndDate() ]);
+        break;
 
-    case "1week":
-	format = "%a %H:%M";
-	gantt.timeDomain([ d3.time.day.offset(getEndDate(), -7), getEndDate() ]);
-	break;
-    default:
-	format = "%H:%M"
+        case "6hr":
+            format = "%H:%M";
+            gantt.timeDomain([ d3.time.hour.offset(getEndDate(), -6), getEndDate() ]);
+        break;
 
+        case "1day":
+            format = "%H:%M";
+            gantt.timeDomain([ d3.time.day.offset(getEndDate(), -1), getEndDate() ]);
+        break;
+
+        case "1week":
+            format = "%a %H:%M";
+            gantt.timeDomain([ d3.time.day.offset(getEndDate(), -7), getEndDate() ]);
+        break;
+        default:
+            format = "%H:%M";
     }
     gantt.tickFormat(format);
     gantt.redraw(tasks);
@@ -74,7 +79,7 @@ function changeTimeDomain(timeDomainString) {
 function getEndDate() {
     var lastEndDate = Date.now();
     if (tasks.length > 0) {
-	lastEndDate = tasks[tasks.length - 1].endDate;
+        lastEndDate = tasks[tasks.length - 1].endDate;
     }
 
     return lastEndDate;
@@ -86,17 +91,19 @@ function addTask() {
     var taskStatusKeys = Object.keys(taskStatus);
     var taskStatusName = taskStatusKeys[Math.floor(Math.random() * taskStatusKeys.length)];
     var taskName = taskNames[Math.floor(Math.random() * taskNames.length)];
+    var taskRandomTitle = taskTitles[Math.floor(Math.random() * taskTitles.length)];
 
     tasks.push({
-	"startDate" : d3.time.hour.offset(lastEndDate, Math.ceil(1 * Math.random())),
-	"endDate" : d3.time.hour.offset(lastEndDate, (Math.ceil(Math.random() * 3)) + 1),
-	"taskName" : taskName,
-	"status" : taskStatusName
+        "startDate" : d3.time.hour.offset(lastEndDate, Math.ceil(1 * Math.random())),
+        "endDate" : d3.time.hour.offset(lastEndDate, (Math.ceil(Math.random() * 3)) + 1),
+        "taskName" : taskName,
+        "status" : taskStatusName,
+        "title": taskRandomTitle
     });
 
     changeTimeDomain(timeDomainString);
     gantt.redraw(tasks);
-};
+}
 
 function removeTask() {
     tasks.pop();
