@@ -118,7 +118,7 @@ d3.gantt = function() {
 	initTimeDomain(tasks);
 	initAxis();
 	
-        var svg = d3.select(".chart");
+        var svg = d3.select("svg");
 
         var ganttChartGroup = svg.select(".gantt-chart");
         var rect = ganttChartGroup.selectAll("rect").data(tasks, keyFunction);
