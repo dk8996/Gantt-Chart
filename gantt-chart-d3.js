@@ -102,11 +102,33 @@ d3.gantt = function() {
 	 
 	 svg.append("g")
 	 .attr("class", "x axis")
-	 .attr("transform", "translate(0, " + (height - margin.top - margin.bottom) + ")")
+	 //modify to 0, 0 to poss hour indicator to top
+	 .attr("transform", "translate(0, " + "0)")
 	 .transition()
 	 .call(xAxis);
 	 
 	 svg.append("g").attr("class", "y axis").transition().call(yAxis);
+
+
+
+
+
+	//gantt.drawLine();
+	 var date = new Date();
+	 console.log(x(0));
+
+	 //this should go on a function
+	 svg.append('line')
+			.attr('y2', x(date))
+			.attr("transform", "translate("+ 10 + ", " + margin.top + ")")
+			.style("stroke-width", 2)
+			.style("stroke", "red")
+			.style("fill", "none");
+	//
+
+
+
+
 	 
 	 return gantt;
 
