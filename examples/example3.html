@@ -6,18 +6,28 @@
 <link type="text/css" href="example.css" rel="stylesheet" />
 </head>
 <body>
-    <a id="forkme_banner" href="http://dk8996.github.io/Gantt-Chart/">View on GitHub</a>
-    <a id="twittme_banner"
-		href="https://twitter.com/intent/tweet?hashtags=d3&original_referer=http%3A%2F%2Fdk8996.github.io%2FGantt-Chart%2F&text=D3%20Gantt%20Chart&tw_p=tweetbutton&url=http%3A%2F%2Fdk8996.github.com%2FGantt-Chart&screen_name=dk8996" target="_blank">Share on Twitter</a>
-	<button type="button" onclick="addTask()">Add Task</button>
-	<button type="button" onclick="removeTask()">Remove Task</button>
+	<!--<button type="button" onclick="addTask()">Add Task</button>
+	<button type="button" onclick="removeTask()">Remove Task</button>-->
 	<button type="button" onclick="changeTimeDomain('1hr')">1 HR</button>
 	<button type="button" onclick="changeTimeDomain('3hr')">3 HR</button>
 	<button type="button" onclick="changeTimeDomain('6hr')">6 HR</button>
 	<button type="button" onclick="changeTimeDomain('1day')">1 DAY</button>
 	<button type="button" onclick="changeTimeDomain('1week')">1 WEEK</button>
 	<script type="text/javascript" src="../lib/d3/d3.v3.min.js"></script>
+	<script type="text/javascript" src="../lib/jquery-1.11.3.min.js"></script>
 	<script type="text/javascript" src="../gantt-chart-d3.js"></script>
 	<script type="text/javascript" src="example3.js"></script>
 </body>
 </html>
+<style>
+.height-flight{
+	height: 45px;
+}
+</style>
+<script type="javascript">
+$( document ).ready(function() {
+	console.log('ready');
+    $('.x').className= className+ "translate-x";
+});
+
+</script
