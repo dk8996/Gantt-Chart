@@ -1,7 +1,4 @@
 var tasks = [
-{"task":"task","startDate":new Date("Sun Dec 09 01:36:45 EST 2012"),"endDate":new Date("Sun Dec 09 02:36:45 EST 2012"),"taskName":"Tail#3 Flight","status":"RUNNING"},
-{"task":"task","startDate":new Date("Sun Dec 09 04:56:32 EST 2012"),"endDate":new Date("Sun Dec 09 06:35:47 EST 2012"),"taskName":"Tail#4 Flight","status":"RUNNING"},
-{"task":"task","startDate":new Date("Sun Dec 09 06:29:53 EST 2012"),"endDate":new Date("Sun Dec 09 06:34:04 EST 2012"),"taskName":"Tail#1 Flight","status":"RUNNING"},
 {"startDate":new Date("Sun Dec 09 05:35:21 EST 2012"),"endDate":new Date("Sun Dec 09 06:21:22 EST 2012"),"taskName":"Tail#2 Flight","status":"RUNNING"},
 {"startDate":new Date("Sun Dec 09 05:00:06 EST 2012"),"endDate":new Date("Sun Dec 09 05:05:07 EST 2012"),"taskName":"Tail#1 Flight","status":"RUNNING"},
 {"startDate":new Date("Sun Dec 09 03:46:59 EST 2012"),"endDate":new Date("Sun Dec 09 04:54:19 EST 2012"),"taskName":"Tail#2 Flight","status":"RUNNING"},
@@ -25,14 +22,15 @@ var tasks = [
 {"startDate":new Date("Sun Dec 09 12:27:15 EST 2012"),"endDate":new Date("Sun Dec 09 12:54:56 EST 2012"),"taskName":"Tail#3 Flight","status":"SUCCEEDED"},
 {"startDate":new Date("Sat Dec 08 23:12:24 EST 2012"),"endDate":new Date("Sun Dec 09 00:26:13 EST 2012"),"taskName":"Tail#4 Flight","status":"KILLED"}];
 
+
 var taskStatus = {
-    "SUCCEEDED" : "bar",
-    "FAILED" : "bar-failed",
-    "RUNNING" : "bar-running",
-    "KILLED" : "bar-killed"
+    "SUCCEEDED" : "bar height-flight",
+    "FAILED" : "bar-failed height-flight",
+    "RUNNING" : "bar-running height-flight",
+    "KILLED" : "bar-killed height-flight"
 };
 
-var taskNames = [ "D Job", "P Job", "E Job", "A Job", "N Job" ];
+var taskNames = [ "Tail#1 Flight", "Tail#2 Flight", "Tail#3 Flight", "Tail#4 Flight", "Tail#5 Flight" ];
 
 tasks.sort(function(a, b) {
     return a.endDate - b.endDate;
@@ -104,6 +102,7 @@ function getEndDate() {
     return lastEndDate;
 }
 
+/*
 function addTask() {
 
     var lastEndDate = getEndDate();
@@ -128,3 +127,4 @@ function removeTask() {
     changeTimeDomain(timeDomainString);
     gantt.redraw(tasks);
 };
+*/
