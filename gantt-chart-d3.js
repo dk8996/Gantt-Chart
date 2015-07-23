@@ -108,15 +108,18 @@ d3.gantt = function() {
 			.data(tasks)
 			.enter()
 			.append("text")
-			.text(function(d){
-				return d.task;
-			})
-			.attr("x", function(d) { return x(d.startDate) + 15; })
-			.attr("y", function(d) { return y(d.taskName) + 50; })
-			.attr("font-size", 11)
-	       	.attr("text-anchor", "middle")
-	       	.attr("text-height", "20")
-			.attr("fill", "#000");
+				.text(function(d){
+					return d.task;
+				})
+				.attr("x", function(d) { return x(d.startDate) + 15; })
+				.attr("y", function(d) { return y(d.taskName) + 50; })
+				.attr("font-size", 11)
+		       	.attr("text-anchor", "middle")
+		       	.attr("text-height", "20")
+				.attr("fill", "#000")
+				.attr("visibility", function(d){
+					return d.textVisible;
+				});
     };
 
 
@@ -135,9 +138,9 @@ d3.gantt = function() {
 		//sets the svg to draw on
 		var svg = d3.select("body")
 			.append("svg")
-			.attr("class", "chart")
-			.attr("width", width + margin.left + margin.right)
-			.attr("height", height + margin.top + margin.bottom)
+				.attr("class", "chart")
+				.attr("width", width + margin.left + margin.right)
+				.attr("height", height + margin.top + margin.bottom)
 			//append a group g with class gantt-chart to attach x, y axes and drawings
 			.append("g")
 	    	    .attr("class", "gantt-chart")
@@ -223,11 +226,25 @@ d3.gantt = function() {
     };
 
 
+
+
+    function hideText(dates, tasks) {
+    	var start = dates[0],
+    		end = dates[1],
+    		length = tasks.length;
+
+		for(var i = 0; i < length; i++) {
+    		tasks[i].textVisible = tasks[i].startDate >= start && tasks[i].endDate <= end ? tasks[i].textVisible = "visible" : tasks[i].textVisible = "hidden";
+    	}
+    };
+
+
     
 
-    gantt.timeDomain = function(value) {
+    gantt.timeDomain = function(value, tasks) {
 		if (!arguments.length)
 		    return [ timeDomainStart, timeDomainEnd ];
+		hideText(value, tasks);
 		timeDomainStart = +value[0], timeDomainEnd = +value[1];
 		return gantt;
     };
