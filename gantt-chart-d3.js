@@ -91,7 +91,7 @@ d3.gantt = function() {
 				    if(taskStatus[d.status] == null){ return "bar";}
 					    return taskStatus[d.status];
 				    })
-				.transition()
+				//z.transition()
 				.attr("y", 0)
 				.attr("transform", rectTransform)
 				.attr("height", function(d) { return y.rangeBand(); })
@@ -105,12 +105,6 @@ d3.gantt = function() {
     
     //function to dra text
     function drawTexts(group) {
-    	console.log(group.selectAll("g"));
-    	console.log(group.selectAll("g"));
-
-
-    	
-
     	group.selectAll("text")
 			.data(tasks)
 			.enter()
@@ -231,8 +225,12 @@ d3.gantt = function() {
 
 
 
-
+    //hide the text of a rectangle whenever this is out of boundaries
     function hideText(dates, tasks) {
+    	
+    	if(!tasks)
+    		return false;
+
     	var start = dates[0],
     		end = dates[1],
     		length = tasks.length;
