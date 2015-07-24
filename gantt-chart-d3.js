@@ -83,6 +83,7 @@ d3.gantt = function() {
     	group.selectAll("rect")
 			.data(tasks, keyFunction)
 			.enter()
+			.insert("g", ":first-child")
 			.append("rect")
 				.attr("rx", 5)
 		    	.attr("ry", 5)
@@ -104,6 +105,12 @@ d3.gantt = function() {
     
     //function to dra text
     function drawTexts(group) {
+    	console.log(group.selectAll("g"));
+    	console.log(group.selectAll("g"));
+
+
+    	
+
     	group.selectAll("text")
 			.data(tasks)
 			.enter()
@@ -111,12 +118,9 @@ d3.gantt = function() {
 				.text(function(d){
 					return d.task;
 				})
-				.attr("x", function(d) { return x(d.startDate) + 15; })
-				.attr("y", function(d) { return y(d.taskName) + 50; })
-				.attr("font-size", 11)
-		       	.attr("text-anchor", "middle")
-		       	.attr("text-height", "20")
-				.attr("fill", "#000")
+				.attr("x", function(d) { return ( (x(d.startDate) + x(d.endDate)) / 2 ); })
+				.attr("y", function(d) { return y(d.taskName) + 25; })
+		       	.attr("text-anchor", "middle")				
 				.attr("visibility", function(d){
 					return d.textVisible;
 				});

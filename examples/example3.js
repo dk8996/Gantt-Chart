@@ -62,33 +62,37 @@ gantt(tasks);
 function changeTimeDomain(timeDomainString) {
     this.timeDomainString = timeDomainString;
     switch (timeDomainString) {
-    case "1hr":
-	format = "%H:%M:%S";
-	gantt.timeDomain([ d3.time.hour.offset(getEndDate(), -1), getEndDate() ], tasks);
-	break;
-    case "3hr":
-	format = "%H:%M";
-	gantt.timeDomain([ d3.time.hour.offset(getEndDate(), -3), getEndDate() ], tasks);
-	break;
 
-    case "6hr":
-	format = "%H:%M";
-	gantt.timeDomain([ d3.time.hour.offset(getEndDate(), -6), getEndDate() ], tasks);
-	break;
+        case "1hr":
+        	format = "%H:%M:%S";
+        	gantt.timeDomain([ d3.time.hour.offset(getEndDate(), -1), getEndDate() ], tasks);
+        	break;
 
-    case "1day":
-	format = "%H:%M";
-	gantt.timeDomain([ d3.time.day.offset(getEndDate(), -1), getEndDate() ], tasks);
-	break;
+        case "3hr":
+        	format = "%H:%M";
+        	gantt.timeDomain([ d3.time.hour.offset(getEndDate(), -3), getEndDate() ], tasks);
+        	break;
 
-    case "1week":
-	format = "%a %H:%M";
-	gantt.timeDomain([ d3.time.day.offset(getEndDate(), -7), getEndDate() ], tasks);
-	break;
-    default:
-	format = "%H:%M"
+        case "6hr":
+        	format = "%H:%M";
+        	gantt.timeDomain([ d3.time.hour.offset(getEndDate(), -6), getEndDate() ], tasks);
+        	break;
+
+        case "1day":
+        	format = "%H:%M";
+        	gantt.timeDomain([ d3.time.day.offset(getEndDate(), -1), getEndDate() ], tasks);
+        	break;
+
+        case "1week":
+        	format = "%a %H:%M";
+        	gantt.timeDomain([ d3.time.day.offset(getEndDate(), -7), getEndDate() ], tasks);
+        	break;
+    
+        default:
+        	format = "%H:%M"
 
     }
+    
     gantt.tickFormat(format);
     gantt.redraw(tasks);
 }
