@@ -83,6 +83,7 @@ d3.gantt = function() {
     	group.selectAll("rect")
 			.data(tasks, keyFunction)
 			.enter()
+			.insert("g", ":first-child")
 			.append("rect")
 				.attr("rx", 5)
 		    	.attr("ry", 5)
@@ -90,7 +91,7 @@ d3.gantt = function() {
 				    if(taskStatus[d.status] == null){ return "bar";}
 					    return taskStatus[d.status];
 				    })
-				.transition()
+				//z.transition()
 				.attr("y", 0)
 				.attr("transform", rectTransform)
 				.attr("height", function(d) { return y.rangeBand(); })
@@ -108,15 +109,15 @@ d3.gantt = function() {
 			.data(tasks)
 			.enter()
 			.append("text")
-			.text(function(d){
-				return d.task;
-			})
-			.attr("x", function(d) { return x(d.startDate) + 15; })
-			.attr("y", function(d) { return y(d.taskName) + 50; })
-			.attr("font-size", 11)
-	       	.attr("text-anchor", "middle")
-	       	.attr("text-height", "20")
-			.attr("fill", "#000");
+				.text(function(d){
+					return d.task;
+				})
+				.attr("x", function(d) { return ( (x(d.startDate) + x(d.endDate)) / 2 ); })
+				.attr("y", function(d) { return y(d.taskName) + 25; })
+		       	.attr("text-anchor", "middle")				
+				.attr("visibility", function(d){
+					return d.textVisible;
+				});
     };
 
 
@@ -135,9 +136,9 @@ d3.gantt = function() {
 		//sets the svg to draw on
 		var svg = d3.select("body")
 			.append("svg")
-			.attr("class", "chart")
-			.attr("width", width + margin.left + margin.right)
-			.attr("height", height + margin.top + margin.bottom)
+				.attr("class", "chart")
+				.attr("width", width + margin.left + margin.right)
+				.attr("height", height + margin.top + margin.bottom)
 			//append a group g with class gantt-chart to attach x, y axes and drawings
 			.append("g")
 	    	    .attr("class", "gantt-chart")
@@ -223,11 +224,29 @@ d3.gantt = function() {
     };
 
 
+
+    //hide the text of a rectangle whenever this is out of boundaries
+    function hideText(dates, tasks) {
+    	
+    	if(!tasks)
+    		return false;
+
+    	var start = dates[0],
+    		end = dates[1],
+    		length = tasks.length;
+
+		for(var i = 0; i < length; i++) {
+    		tasks[i].textVisible = tasks[i].startDate >= start && tasks[i].endDate <= end ? tasks[i].textVisible = "visible" : tasks[i].textVisible = "hidden";
+    	}
+    };
+
+
     
 
-    gantt.timeDomain = function(value) {
+    gantt.timeDomain = function(value, tasks) {
 		if (!arguments.length)
 		    return [ timeDomainStart, timeDomainEnd ];
+		hideText(value, tasks);
 		timeDomainStart = +value[0], timeDomainEnd = +value[1];
 		return gantt;
     };
