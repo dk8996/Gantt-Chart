@@ -1,5 +1,5 @@
 var tasks = [
-{"task": "task", "textVisible":"visible", "startDate":new Date("Sun Dec 09 00:29:48 EST 2012"),"endDate":new Date("Sun Dec 09 01:44:50 EST 2012"),"taskName":"Tail#1 Flight","status":"SUCCEEDED"},
+    {"task": "task", "textVisible":"visible", "startDate":new Date("Sun Dec 09 00:29:48 EST 2012"),"endDate":new Date("Sun Dec 09 01:44:50 EST 2012"),"taskName":"Tail#1 Flight","status":"SUCCEEDED"},
 ];
 
 
@@ -10,31 +10,33 @@ var taskStatus = {
     "KILLED" : "bar-killed height-flight"
 };
 
-var taskNames = [ "Tail#1 Flight", "Tail#2 Flight", "Tail#3 Flight", "Tail#4 Flight", "Tail#5 Flight" ];
+var margin = {
+    top : 20,
+    right : 40,
+    bottom : 20,
+    left : 80
+};
+
+var taskNames = [ "Tail#1 Flight", "Tail#2 Flight", "Tail#3 Flight", "Tail#4 Flight", "Tail#5 Flight" ],
+    maxDate = tasks[tasks.length - 1].endDate,
+    minDate = tasks[0].startDate,
+    //index in the array of tasks where the "zoom" is positioned
+    lastDate = tasks.length - 1,
+    format = "%H:%M",
+    timeDomainString = "1day",
+    gantt = d3.gantt().taskTypes(taskNames).taskStatus(taskStatus).tickFormat(format);
+
+
 
 tasks.sort(function(a, b) {
     return a.endDate - b.endDate;
 });
-var maxDate = tasks[tasks.length - 1].endDate;
+
+
 tasks.sort(function(a, b) {
     return a.startDate - b.startDate;
 });
-var minDate = tasks[0].startDate;
 
-//index in the array of tasks where the "zoom" is positioned
-var lastDate = tasks.length - 1;
-
-var format = "%H:%M";
-var timeDomainString = "1day";
-
-var gantt = d3.gantt().taskTypes(taskNames).taskStatus(taskStatus).tickFormat(format);
-
-var margin = {
-     top : 20,
-     right : 40,
-     bottom : 20,
-     left : 80
-};
 gantt.margin(margin);
 
 gantt.timeDomainMode("fixed");
@@ -43,9 +45,7 @@ changeTimeDomain(timeDomainString);
 gantt(tasks);
 
 function changeTimeDomain(timeDomainString, direction) {
-    //if zoom button is pressed then direction has value left or right and date from tasks array with index [lastDate] is returned
-    //else the last date from the tasks is returned
-    var endDate = !direction ? getEndDate() : getLastDate(lastDate);
+    var endDate = getLastDate(lastDate);
 
     this.timeDomainString = timeDomainString;
     switch (timeDomainString) {
@@ -111,7 +111,6 @@ function addTask() {
 
     lastDate++;
     changeTimeDomain(timeDomainString);
-    gantt.redraw(tasks);
 };
 
 
@@ -119,7 +118,6 @@ function removeTask() {
     tasks.pop();
     lastDate--;
     changeTimeDomain(timeDomainString);
-    gantt.redraw(tasks);
 };
 
 
