@@ -1,5 +1,5 @@
 var tasks = [
-    {"task": "task", "textVisible":"visible", "startDate":new Date("Sun Dec 09 00:29:48 EST 2012"),"endDate":new Date("Sun Dec 09 01:44:50 EST 2012"),"taskName":"Tail#1 Flight","status":"SUCCEEDED"},
+    {"task": "task", "textVisible":"visible", "startDate":new Date("Mon Jul 26 2015 14:38:03 GMT-0300 (ART)"),"endDate":new Date("Mon Jul 26 2015 15:38:03 GMT-0300 (ART)"),"taskName":"Tail#1 Flight","status":"SUCCEEDED"},
 ];
 
 
@@ -18,14 +18,13 @@ var margin = {
 };
 
 var taskNames = [ "Tail#1 Flight", "Tail#2 Flight", "Tail#3 Flight", "Tail#4 Flight", "Tail#5 Flight" ],
-    maxDate = tasks[tasks.length - 1].endDate,
-    minDate = tasks[0].startDate,
+    maxDate = tasks.length > 0 ? tasks[tasks.length - 1].endDate : new Date(),
+    minDate = tasks.length > 0 ? tasks[0].startDate : new Date(),
     //index in the array of tasks where the "zoom" is positioned
     lastDate = tasks.length - 1,
     format = "%H:%M",
     timeDomainString = "1day",
     gantt = d3.gantt().taskTypes(taskNames).taskStatus(taskStatus).tickFormat(format);
-
 
 
 tasks.sort(function(a, b) {
@@ -51,27 +50,27 @@ function changeTimeDomain(timeDomainString, direction) {
     switch (timeDomainString) {
 
         case "1hr":
-        	format = "%H:%M:%S";
+        	format = "%e %b %H:%M:%S";
         	gantt.timeDomain([ d3.time.hour.offset(endDate, -1), endDate ], tasks);
         	break;
 
         case "3hr":
-        	format = "%H:%M";
+        	format = "%e %b %H:%M";
         	gantt.timeDomain([ d3.time.hour.offset(endDate, -3), endDate ], tasks);
         	break;
 
         case "6hr":
-        	format = "%H:%M";
+        	format = "%e %b %H:%M";
         	gantt.timeDomain([ d3.time.hour.offset(endDate, -6), endDate ], tasks);
         	break;
 
         case "1day":
-        	format = "%H:%M";
+        	format = "%e %b %H:%M";
         	gantt.timeDomain([ d3.time.day.offset(endDate, -1), endDate ], tasks);
         	break;
 
         case "1week":
-        	format = "%a %H:%M";
+        	format = "%e %b %H:%M";
         	gantt.timeDomain([ d3.time.day.offset(endDate, -7), endDate ], tasks);
         	break;
     
@@ -115,6 +114,8 @@ function addTask() {
 
 
 function removeTask() {
+    if (tasks.length === 0)
+        return false;
     tasks.pop();
     lastDate--;
     changeTimeDomain(timeDomainString);
