@@ -1,5 +1,5 @@
 var tasks = [
-    {"task": "task", "textVisible":"visible", "startDate":new Date("Mon Jul 26 2015 14:38:03 GMT-0300 (ART)"),"endDate":new Date("Mon Jul 26 2015 15:38:03 GMT-0300 (ART)"),"taskName":"Tail#1 Flight","status":"SUCCEEDED"},
+    {"task": "task", "textVisible":"visible", "startDate":new Date("Sun Jul 28 00:29:48 EST 2015"),"endDate":new Date("Sun Jul 28 01:44:50 EST 2015"),"taskName":"Tail#1 Flight","status":"SUCCEEDED"},
 ];
 
 
@@ -44,7 +44,7 @@ changeTimeDomain(timeDomainString);
 gantt(tasks);
 
 function changeTimeDomain(timeDomainString, direction) {
-    var endDate = getLastDate(lastDate);
+    var endDate = !direction ? getEndDate() : getLastDate(lastDate);
 
     this.timeDomainString = timeDomainString;
     switch (timeDomainString) {
@@ -114,10 +114,9 @@ function addTask() {
 
 
 function removeTask() {
-    if (tasks.length === 0)
-        return false;
+    if(lastDate >= 0)
+        lastDate--;
     tasks.pop();
-    lastDate--;
     changeTimeDomain(timeDomainString);
 };
 
