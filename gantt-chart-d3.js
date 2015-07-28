@@ -25,7 +25,8 @@ d3.gantt = function() {
     	x = d3.time.scale().domain([ timeDomainStart, timeDomainEnd ]).range([ 0, width ]).clamp(true),
     	y = d3.scale.ordinal().domain(taskTypes).rangeRoundBands([ 0, height - margin.top - margin.bottom ], .1),    
     	xAxis = d3.svg.axis().scale(x).orient("bottom").tickFormat(d3.time.format(tickFormat)).tickSubdivide(true).tickSize(5).tickPadding(3),
-    	yAxis = d3.svg.axis().scale(y).orient("left").tickSize(0);
+    	yAxis = d3.svg.axis().scale(y).orient("left").tickSize(0),
+    	stamp;
 
 
 
@@ -72,6 +73,8 @@ d3.gantt = function() {
 		y = d3.scale.ordinal().domain(taskTypes).rangeRoundBands([ 0, height - margin.top - margin.bottom ], .1);
 		xAxis = d3.svg.axis().scale(x).orient("bottom").tickFormat(d3.time.format(tickFormat)).tickSubdivide(true).tickSize(5).tickPadding(3);
 		yAxis = d3.svg.axis().scale(y).orient("left").tickSize(0);
+		stamp = d3.time.scale().domain([ new Date()]).range([ 0, width ]);
+
     };
 
 
@@ -93,7 +96,7 @@ d3.gantt = function() {
 				//.transition()
 				.attr("y", 0)
 				.attr("transform", rectTransform)
-				.attr("height", function(d, i) {console.log(i); return y.rangeBand(); })
+				.attr("height", function(d, i) { return y.rangeBand(); })
 				.attr("width", function(d) {
 				    	return (x(d.endDate) - x(d.startDate));
 				    });
@@ -124,6 +127,20 @@ d3.gantt = function() {
 
 
 
+    function drawTimeStamp(line) {
+		line.append("line")
+				.attr("x1", x( new Date()) )
+				.attr("x2", x( new Date()) )
+				.attr("y1", 0)
+				.attr("y2", height - margin.bottom)
+				.attr("stroke-width", 2)
+		     	.attr("stroke", "red")
+				.attr("height", height)
+    }
+
+
+
+
 
 
 
@@ -148,6 +165,9 @@ d3.gantt = function() {
 				.attr("transform", "translate(" + margin.left + ", " + margin.top + ")");
 
 
+		var line = svg.append("g")
+			.attr("class", "time-stamp");
+
 
 		//append g to group data in pairs (rectangle-text)
 		var group = svg.append("g")
@@ -158,6 +178,8 @@ d3.gantt = function() {
 		drawRects(group);
 		//call function to draw text
 		drawTexts(group);
+		//call function to draw line positioned at actual time
+		drawTimeStamp(line);
 
 
 		 
@@ -171,7 +193,9 @@ d3.gantt = function() {
 		
 		//append y-axis (tasks)
 		svg.append("g").attr("class", "y axis").transition().call(yAxis);
+		
 
+		
 		 
 		return gantt;
 
@@ -192,11 +216,14 @@ d3.gantt = function() {
 
 		//select the svg
         var svg = d3.select("svg");
+        //
+        var line = svg.selectAll(".time-stamp");
         //select the groups (rectangles-texts) 
 		var group = svg.selectAll(".gantt-chart .group");
 
 		//remove all data from the groups
 		group.selectAll("*").data([]).exit().remove();
+		line.selectAll("line").data([]).exit().remove();
 
 
         //var rect = group.selectAll("rect").data(tasks, keyFunction);        
@@ -204,7 +231,12 @@ d3.gantt = function() {
         //call function to draw rectangles
         drawRects(group);
         //call function to draw text
-		drawTexts(group);		
+		drawTexts(group);
+		//call function to draw line positioned at actual time
+		drawTimeStamp(line);
+
+
+
 
 
 		svg.select(".x").transition().call(xAxis);
