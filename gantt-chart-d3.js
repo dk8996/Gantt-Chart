@@ -236,9 +236,6 @@ d3.gantt = function() {
 		drawTimeStamp(line);
 
 
-
-
-
 		svg.select(".x").transition().call(xAxis);
 		svg.select(".y").transition().call(yAxis);
 		
@@ -258,7 +255,7 @@ d3.gantt = function() {
 
 
     //hide the text of a rectangle whenever this is out of boundaries
-    function hideText(dates, tasks) {
+    gantt.hideText = function(dates, tasks) {
     	
     	if(!tasks)
     		return false;
@@ -278,7 +275,7 @@ d3.gantt = function() {
     gantt.timeDomain = function(value, tasks) {
 		if (!arguments.length)
 		    return [ timeDomainStart, timeDomainEnd ];
-		hideText(value, tasks);
+		gantt.hideText(value, tasks);
 		timeDomainStart = +value[0], timeDomainEnd = +value[1];
 		return gantt;
     };
