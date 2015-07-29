@@ -70,7 +70,7 @@ d3.gantt = function() {
 
     var initAxis = function() {
 		x = d3.time.scale().domain([ timeDomainStart, timeDomainEnd ]).range([ 0, width ]).clamp(true);
-		y = d3.scale.ordinal().domain(taskTypes).rangeRoundBands([ 0, height - margin.top - margin.bottom ], .1);
+		y = d3.scale.ordinal().domain(taskTypes).rangeRoundBands([ 0, height - margin.top - margin.bottom ], .7);
 		xAxis = d3.svg.axis().scale(x).orient("bottom").tickFormat(d3.time.format(tickFormat)).tickSubdivide(true).tickSize(5).tickPadding(3);
 		yAxis = d3.svg.axis().scale(y).orient("left").tickSize(0);
 		stamp = d3.time.scale().domain([ new Date()]).range([ 0, width ]);
