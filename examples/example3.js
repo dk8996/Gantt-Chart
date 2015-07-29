@@ -53,7 +53,7 @@ function viewActualTime () {
         actualTime = true;
 
     defineDomain(timeDomainString, now, actualTime);
-    gantt.hideText( [now, now], tasks);
+    gantt.redraw(tasks);
 };
 
 
