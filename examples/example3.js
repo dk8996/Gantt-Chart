@@ -42,90 +42,22 @@ gantt.margin(margin);
 gantt.timeDomainMode("fixed");
 changeTimeDomain(timeDomainString);
 
-viewActualTime();
+ganttHelper.viewActualTime();
 
 gantt(tasks);
 
 
 
-function viewActualTime () {
-    var now = new Date(),
-        actualTime = true;
-
-    defineDomain(timeDomainString, now, actualTime);
-    gantt.redraw(tasks);
-};
-
-
 
 function changeTimeDomain(timeDomainString, direction) {
-    var endDate = !direction ? getEndDate() : getLastDate(lastDate);
+    var endDate = !direction ? getEndDate() : ganttHelper.getLastDate(lastDate);
 
     this.timeDomainString = timeDomainString;
-    defineDomain(timeDomainString, endDate);
+    ganttHelper.defineDomain(timeDomainString, endDate);
     
     gantt.tickFormat(format);
     gantt.redraw(tasks);
 }
-
-
-
-
-function setMinutes(actualTime, date, addMinutes) {
-    if(actualTime)
-        date.setMinutes(date.getMinutes() + addMinutes);
-};
-
-
-
-
-function defineDomain(timeDomainString, date, actualTime) {
-    var range;
-    switch (timeDomainString) {
-
-        case "1hr":
-            format = "%e %b %H:%M:%S";
-            range = 1;
-            addMinutes = 25;
-            setMinutes(actualTime, date, addMinutes);
-            gantt.timeDomain([ d3.time.hour.offset(date, -range), date ], tasks);
-            break;
-
-        case "3hr":
-            format = "%e %b %H:%M";
-            range = 3;
-            gantt.timeDomain([ d3.time.hour.offset(date, -range), date ], tasks);
-            addMinutes = 75;
-            break;
-
-        case "6hr":
-            format = "%e %b %H:%M";
-            range = 6;
-            addMinutes = 150;
-            setMinutes(actualTime, date, addMinutes);
-            gantt.timeDomain([ d3.time.hour.offset(date, -range), date ], tasks);
-            break;
-
-        case "1day":
-            format = "%e %b %H:%M";
-            range = 1;
-            addMinutes = 600;
-            setMinutes(actualTime, date, addMinutes);
-            gantt.timeDomain([ d3.time.day.offset(date, -range), date ], tasks);
-            break;
-
-        case "1week":
-            format = "%e %b %H:%M";
-            range = 7;
-            addMinutes = 4200;
-            setMinutes(actualTime, date, addMinutes);
-            gantt.timeDomain([ d3.time.day.offset(date, -range), date ], tasks);
-            break;
-    
-        default:
-            format = "%H:%M"
-    }
-};
 
 
 
@@ -137,6 +69,7 @@ function getEndDate() {
 
     return lastEndDate;
 }
+
 
 
 function addTask() {
@@ -159,6 +92,7 @@ function addTask() {
 };
 
 
+
 function removeTask() {
     if(lastDate >= 0)
         lastDate--;
@@ -167,23 +101,14 @@ function removeTask() {
 };
 
 
-//function called to move in timeline.. adds or substracts lastdate (index in tasks to be shown)
-function zoom(direction) {
-    if(direction === 'left' && lastDate > 0)
-        lastDate--;
-    else if(direction === 'right' && tasks.length -1 > lastDate)
-        lastDate++;
 
+function zoom(direction) {
+    ganttHelper.zoom(direction);
     changeTimeDomain(timeDomainString, direction);
 };
 
 
-//get last date of the tasks array with a specific index
-function getLastDate(i) {
-    var lastDate = Date.now();
-    if (tasks.length > 0) {
-        lastDate = tasks[i].endDate;
-    }
 
-    return lastDate;
+function viewActualTime() {
+    ganttHelper.viewActualTime();
 };
