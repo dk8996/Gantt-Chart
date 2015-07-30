@@ -4,8 +4,8 @@ var ganttHelper = {
 	    var now = new Date(),
 	        actualTime = true;
 
-	    ganttHelper.defineDomain(timeDomainString, now, actualTime);
-	    gantt.redraw();
+	    ganttHelper.defineDomain(constants.timeDomainString, now, actualTime);
+	    constants.gantt.redraw();
 	},
 
 
@@ -22,65 +22,65 @@ var ganttHelper = {
 	    switch (timeDomainString) {
 
 	        case "1hr":
-	            format = "%e %b %H:%M:%S";
+	            constants.format = "%e %b %H:%M:%S";
 	            range = 1;
 	            addMinutes = 25;
 	            ganttHelper.addMinutes(actualTime, date, addMinutes);
-	            gantt.timeDomain([ d3.time.hour.offset(date, -range), date ], tasks);
+	            constants.gantt.timeDomain([ d3.time.hour.offset(date, -range), date ], constants.tasks);
 	            break;
 
 	        case "3hr":
-	            format = "%e %b %H:%M";
+	            constants.format = "%e %b %H:%M";
 	            range = 3;
 	            addMinutes = 75;
 	            ganttHelper.addMinutes(actualTime, date, addMinutes);
-	            gantt.timeDomain([ d3.time.hour.offset(date, -range), date ], tasks);
+	            constants.gantt.timeDomain([ d3.time.hour.offset(date, -range), date ], constants.tasks);
 	            break;
 
 	        case "6hr":
-	            format = "%e %b %H:%M";
+	            constants.format = "%e %b %H:%M";
 	            range = 6;
 	            addMinutes = 150;
 	            ganttHelper.addMinutes(actualTime, date, addMinutes);
-	            gantt.timeDomain([ d3.time.hour.offset(date, -range), date ], tasks);
+	            constants.gantt.timeDomain([ d3.time.hour.offset(date, -range), date ], constants.tasks);
 	            break;
 
 	        case "1day":
-	            format = "%e %b %H:%M";
+	            constants.format = "%e %b %H:%M";
 	            range = 1;
 	            addMinutes = 600;
 	            ganttHelper.addMinutes(actualTime, date, addMinutes);
-	            gantt.timeDomain([ d3.time.day.offset(date, -range), date ], tasks);
+	            constants.gantt.timeDomain([ d3.time.day.offset(date, -range), date ], constants.tasks);
 	            break;
 
 	        case "1week":
-	            format = "%e %b %H:%M";
+	            constants.format = "%e %b %H:%M";
 	            range = 7;
 	            addMinutes = 4200;
 	            ganttHelper.addMinutes(actualTime, date, addMinutes);
-	            gantt.timeDomain([ d3.time.day.offset(date, -range), date ], tasks);
+	            constants.gantt.timeDomain([ d3.time.day.offset(date, -range), date ], constants.tasks);
 	            break;
 	    
 	        default:
-	            format = "%H:%M"
+	            constants.format = "%H:%M"
 	    }
 	},
 
 
 
 	zoom : function zoom(direction) {
-	    if(direction === 'left' && lastDate > 0)
-	        lastDate--;
-	    else if(direction === 'right' && tasks.length -1 > lastDate)
-	        lastDate++;	    
+	    if(direction === 'left' && constants.lastDate > 0)
+	        constants.lastDate--;
+	    else if(direction === 'right' && constants.tasks.length -1 > constants.lastDate)
+	        constants.lastDate++;
 	},
 
 
 
 	getLastDate : function getLastDate(i) {
 	    var lastDate = Date.now();
-	    if (tasks.length > 0) {
-	        lastDate = tasks[i].endDate;
+	    if (constants.tasks.length > 0) {
+	        lastDate = constants.tasks[i].endDate;
 	    }
 
 	    return lastDate;
