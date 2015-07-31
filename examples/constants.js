@@ -1,6 +1,6 @@
 var constants = {
 
-    "tasks" : flights.flights,
+    "tasks" : ganttHelper.getFlights(),
 
     "taskStatus" : {
         "SUCCEEDED" : "bar height-flight",

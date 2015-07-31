@@ -90,10 +90,29 @@ var ganttHelper = {
 
 	getFlights : function() {
 		var flights = {};
-		$.getJSON('flights.js', function(data) {
-			flights = data;
+		
+		$.ajax({
+			url: 'flights.json',
+			dataType: 'json',
+			async: false,
+			success: function(data) {
+				flights = data.global.flights;
+			}
 		});
+		
+		ganttHelper.verifyDateFormat(flights);
 
 		return flights;
+	},
+
+
+
+	verifyDateFormat : function(flights) {
+		var length = flights.length;
+
+		for(var i = 0; i < length; i++) {
+			flights[i].startDate = new Date(flights[i].startDate);
+			flights[i].endDate = new Date(flights[i].endDate);
+		}
 	}
 };
