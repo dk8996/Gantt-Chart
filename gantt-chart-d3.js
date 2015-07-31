@@ -54,14 +54,16 @@ d3.gantt = function() {
     };
 
 
-
-
     //function to draw rectangles
     function drawRects(group) {
     	var rect = group.selectAll("rect").data(constants.tasks, keyFunction);    	
 
 		rect.enter()
 			.insert("g", ":first-child")
+			.on("click", function(d) {
+				d3.select(".selected").classed("selected", false);
+            	d3.select(this).classed("selected", true);            	
+			})
 			.append("rect")
 				.attr("rx", 5)
 		    	.attr("ry", 5)
