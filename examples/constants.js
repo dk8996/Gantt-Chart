@@ -1,8 +1,6 @@
 var constants = {
 
-    "tasks" : [
-        {"task": "task", "textVisible":"visible", "startDate":new Date("Sun Jul 28 00:29:48 EST 2015"),"endDate":new Date("Sun Jul 28 01:44:50 EST 2015"),"taskName":"Tail#1 Flight","status":"SUCCEEDED"},
-    ],    
+    "tasks" : flights.flights,
 
     "taskStatus" : {
         "SUCCEEDED" : "bar height-flight",
@@ -37,8 +35,6 @@ var constants = {
     "timeDomainEnd" : d3.time.hour.offset(new Date(),+3),
 
     "taskTypes" : [],
-
-    "taskStatus" : [],
 
     "tickFormat" : "%H:%M"
 }

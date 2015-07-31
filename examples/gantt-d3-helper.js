@@ -84,5 +84,16 @@ var ganttHelper = {
 	    }
 
 	    return lastDate;
+	},
+
+
+
+	getFlights : function() {
+		var flights = {};
+		$.getJSON('flights.js', function(data) {
+			flights = data;
+		});
+
+		return flights;
 	}
 };

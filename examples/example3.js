@@ -22,7 +22,7 @@ constants.gantt(constants.tasks);
 function changeTimeDomain(timeDomainString, direction) {
     var endDate = !direction ? getEndDate() : ganttHelper.getLastDate(constants.lastDate);
 
-    this.timeDomainString = timeDomainString;
+    constants.timeDomainString = timeDomainString;
     ganttHelper.defineDomain(timeDomainString, endDate);
     
     constants.gantt.tickFormat(constants.format);
