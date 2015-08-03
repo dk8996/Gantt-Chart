@@ -1,0 +1,20 @@
+{
+  "name": "crewschedgui",
+  "version": "0.1.0",
+  "dependencies": {
+    "angular": "~1.3.0",
+    "json3": "~3.2.4",
+    "es5-shim": "~2.0.8",
+    "angular-route": "~1.2.12",
+    "angular-resource": "~1.2.13",
+    "angular-animate": "~1.2.13",
+    "angular-touch": "~1.2.13",
+    "lodash": "~2.4.1"
+  },
+  "devDependencies": {
+    "angular-mocks": "~1.3.0"
+  },
+  "resolutions": {
+    "angular": "1.3.15"
+  }
+}

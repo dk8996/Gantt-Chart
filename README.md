@@ -1,99 +1,44 @@
-## Introduction
-A basic implementation of a Gantt Chart using D3.js. Here is a example [Example 1] (http://bl.ocks.org/dk8996/5534835) and another one [Example 2] (http://bl.ocks.org/dk8996/5449641).
+# Angular seed
 
-![screenshot](https://raw.github.com/dk8996/Gantt-Chart/master/examples/screenshot1.png)
+This project is an application skeleton for a typical AngularJS application.
 
-#### External Data Example
-Here is a [example] (http://static.mentful.com/d3ganttchart/example.html) of loading external data, in JSON format, into the Gantt Chart, you need to watch out for [cross-domain restrictions] (http://en.wikipedia.org/wiki/Same-origin_policy). 
+It contains AngularJS libraries, along some AngularJS plugins. It also contains a bunch of preconfigured grunt tasks, so you don't have to worry about build, development server or setting up a test runner.
 
-## Getting Started
-### Data
-Create a array of all your data.
+## How to run the app
 
-```javascript
-var tasks = [
-
-{
-    "startDate": new Date("Sun Dec 09 01:36:45 EST 2012"),
-    "endDate": new Date("Sun Dec 09 02:36:45 EST 2012"),
-    "taskName": "E Job",
-    "status": "FAILED"
-},
-
-{
-    "startDate": new Date("Sun Dec 09 04:56:32 EST 2012"),
-    "endDate": new Date("Sun Dec 09 06:35:47 EST 2012"),
-    "taskName": "A Job",
-    "status": "RUNNING"
-}];
+Start a local server
 
 ```
-
-### Style
-Create a map between task status and css class, this is optional.
-
-```javascript
-var taskStatus = {
-    "SUCCEEDED": "bar",
-    "FAILED": "bar-failed",
-    "RUNNING": "bar-running",
-    "KILLED": "bar-killed"
-};
+$ grunt server
 ```
 
-```css
-  .bar {
-      fill: #33b5e5;
-  }
-  
-  .bar-failed {
-    fill: #CC0000;
-  }
+Start mockey (if it was set up when the app was created)
 
-  .bar-running {
-      fill: #669900;
-  }
-  
-  .bar-succeeded {
-    fill: #33b5e5;
-  }
-
-  .bar-killed {
-      fill: #ffbb33;
-  }
 ```
-### Task Names
-Create a array of task names, they will be display on they y-axis in the order given to the array.
-
-```javascript
-var taskNames = [ "D Job", "P Job", "E Job", "A Job", "N Job" ];
+$ grunt start-mockey
 ```
 
-### Create a Simple Gantt-Chart
-Create a simple Gantt-Chart
+Stop mockey
 
-```javascript
-var gantt = d3.gantt().taskTypes(taskNames).taskStatus(taskStatus);
-gantt(tasks);
+```
+$ grunt kill-mockey
 ```
 
-## Dependencies & Building
-Relies on the fantastic [D3 visualization library](http://mbostock.github.com/d3/) to do lots of the heavy lifting for stacking and rendering to SVG.
+## How to run unit tests
 
-## License
+```
+$ grunt run-unit
+```
 
-   Copyright 2012 Dimitry Kudryavtsev
+## How to run e2e tests
 
-   Licensed under the Apache License, Version 2.0 (the "License");
-   you may not use this file except in compliance with the License.
-   You may obtain a copy of the License at
+```
+$ grunt run-e2e #It will open a browser tab poiting to http://localhost:9876  
+```
 
-       http://www.apache.org/licenses/LICENSE-2.0
+## How to run the build
 
-   Unless required by applicable law or agreed to in writing, software
-   distributed under the License is distributed on an "AS IS" BASIS,
-   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-   See the License for the specific language governing permissions and
-   limitations under the License.
-   
-   [![githalytics.com alpha](https://cruel-carlota.pagodabox.com/c088458a0319a78b63aaea9c54fba4de "githalytics.com")](http://githalytics.com/dk8996/Gantt-Chart)
+```
+$ grunt build #It will create dist/ directory  
+$ grunt server:dist #It will create dist/ directory and open a browser tap poiting to http://localhost:9010 serving dist/ directory  
+```

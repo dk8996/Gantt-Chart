@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Title Here</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+        <!-- build:css(app) styles/bundle.css -->
+        <link rel="stylesheet" href="styles/bundle.css">
+        <!-- endbuild -->
+</head>
+  <body ng-app="CrewSchedGUI">
+
+    <!-- Add your site or application content here -->
+    <div class="container" ng-view></div>
+
+    <!-- build:js scripts/modules.js -->
+    
+    <!-- bower:js -->
+    <script src="bower_components/es5-shim/es5-shim.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/json3/lib/json3.min.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-touch/angular-touch.js"></script>
+    <script src="bower_components/lodash/dist/lodash.compat.js"></script>
+    <!-- endbower -->
+
+    <!-- endbuild -->
+
+    <!-- build:js(app) scripts/scripts.js -->
+    <script src="scripts/app.js"></script>
+
+    <!-- yo:features -->
+
+    <!-- yo:controllers -->
+
+    <script src="scripts/config.js"></script>
+
+    <script src="scripts/services/services.js"></script>
+    <!-- yo:services -->
+
+    <script src="scripts/filters/filters.js"></script>
+    <!-- yo:filters -->
+
+    <script src="scripts/directives/directives.js"></script>
+    <!-- yo:directives -->
+    <!-- endbuild -->
+
+</body>
+</html>
