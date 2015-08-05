@@ -8,7 +8,7 @@ module.exports = function(grunt) {
 
         
         grunt.task.run([
-            'register-git-hooks',
+            //'register-git-hooks',
             'jshint',
             'bowerInstall',
             'compass:dev',
@@ -57,7 +57,7 @@ module.exports = function(grunt) {
         var tasks = [];
 
         tasks = tasks.concat([
-            'jshint',
+            //'jshint',
             'clean:dist',
             'bowerInstall',
             'compass:dist',
@@ -105,9 +105,9 @@ module.exports = function(grunt) {
 
     
 
-    grunt.registerTask('register-git-hooks', [
-        'githooks'
-    ]);
+    //grunt.registerTask('register-git-hooks', [
+    //    'githooks'
+    //]);
 
     grunt.registerTask('default', [
         'build'
@@ -124,6 +124,6 @@ module.exports = function(grunt) {
     ]);
 
     // commit task for git
-    grunt.registerTask('git-push', ['jshint','test']);
-    grunt.registerTask('git-commit', ['jshint']);
+    //grunt.registerTask('git-push', ['jshint','test']);
+    //grunt.registerTask('git-commit', ['jshint']);
 };

@@ -1,0 +1,203 @@
+body {
+  font: 14px Helvetica Neue;
+  text-rendering: optimizeLegibility;
+  margin-top: 1em;
+  overflow-y: scroll;
+}
+
+a {
+  color: steelblue;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.body {
+  width: 960px;
+  margin: auto;
+}
+
+.topbar a {
+  margin-right: .5em;
+}
+
+.content {
+  position: relative;
+  margin-left: 240px;
+}
+
+.content img {
+  display: block;
+  margin: auto;
+}
+
+.sidebar {
+  position: absolute;
+  left: -240px;
+  width: 230px;
+  font-weight: 300;
+}
+
+.gallery {
+  position: relative;
+  left: -240px;
+  width: 970px;
+}
+
+.content .gallery img {
+  display: inline;
+  width: 226px;
+  height: 180px;
+  border: solid 2px #ccc;
+  margin-right: 10px;
+  margin-bottom: 8px;
+}
+
+.content .gallery a:hover img {
+  border-color: steelblue;
+}
+
+.list {
+  clear: left;
+  margin-top: 14px;
+}
+
+.list img {
+  float: left;
+}
+
+h1 {
+  font-size: 36px;
+  font-weight: 300;
+  margin-bottom: .3em;
+}
+
+.sidebar {
+  color: #666;
+}
+
+.sidebar ul {
+  padding-left: 0;
+  list-style-type: none;
+}
+
+.sidebar li {
+  white-space: nowrap;
+  width: 230px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sidebar h3 {
+  font-weight: 300;
+}
+
+.foot {
+  font-weight: 300;
+  margin-left: 240px;
+  padding-top: 3em;
+  width: 710px;
+  clear: both;
+}
+
+button {
+  background: #222 url(button-overlay.png) repeat-x;
+  font: 12px Helvetica Neue;
+  color: #fff;
+  text-shadow: 0 -1px 1px #222;
+  padding: 6px 10px 6px 10px;
+  border: 0;
+  border-bottom: 1px solid #222;
+  min-width: 80px;
+  -moz-border-radius: 5px;
+  -moz-box-shadow: 0 1px 3px #999;
+  -webkit-border-radius: 5px;
+  -webkit-box-shadow: 0 1px 3px #999;
+}
+
+button:hover {
+  background-color: #555;
+}
+
+.highlight {
+  font: 12px monospace;
+}
+
+.highlight pre {
+  overflow-x: auto;
+}
+
+html,body,#wrapper {
+  width: 100%;
+  height: 100%;
+  margin: 0px;
+}
+
+.chart {
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+}
+
+.axis path,.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.bar {
+  fill: #33b5e5;
+}
+
+.bar-failed {
+  fill: #CC0000;
+}
+
+.bar-running {
+  fill: #669900;
+}
+
+.bar-succeeded {
+  fill: #33b5e5;
+}
+
+.bar-killed {
+  fill: #ffbb33;
+}
+
+#forkme_banner {
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 10px;
+  z-index: 10;
+  padding: 10px 50px 10px 10px;
+  color: #fff;
+  background:
+    url('http://dk8996.github.io/Gantt-Chart/images/blacktocat.png')
+    #0090ff no-repeat 95% 50%;
+  font-weight: 700;
+  box-shadow: 0 0 10px rgba(0, 0, 0, .5);
+  border-bottom-left-radius: 2px;
+  border-bottom-right-radius: 2px;
+  text-decoration: none;
+}
+
+#twittme_banner {
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 180px;
+  z-index: 10;
+  padding: 10px 50px 10px 10px;
+  color: #fff;
+  background:
+    url('http://dk8996.github.io/Gantt-Chart/images/twitter.png')
+    #0090ff no-repeat 95% 50%;
+  font-weight: 700;
+  box-shadow: 0 0 10px rgba(0, 0, 0, .5);
+  border-bottom-left-radius: 2px;
+  border-bottom-right-radius: 2px;
+  text-decoration: none;
+}

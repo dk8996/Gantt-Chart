@@ -10,7 +10,7 @@
 module.exports = function (grunt) {
 
     // load task timming plugin
-    require('time-grunt')(grunt);
+    //require('time-grunt')(grunt);
 
     // config
     grunt.config.app = 'app';
@@ -22,14 +22,16 @@ module.exports = function (grunt) {
     grunt.config.SERVER_DIST_PORT = 9010;
 
     // load all grunt tasks
+    /*
     require('jit-grunt')(grunt, {
-        shell: 'grunt-shell-spawn',
+        //shell: 'grunt-shell-spawn',
         ngconstant: 'grunt-ng-constant',
         protractor: 'grunt-protractor-runner',
         useminPrepare: 'grunt-usemin',
         cdnify: 'grunt-google-cdn'
-    });
+    });*/
 
+    require('load-grunt-tasks')(grunt);
     // load defualts tasks and configs
     grunt.loadTasks('grunt-tasks/');
     grunt.loadTasks('grunt-tasks/options');

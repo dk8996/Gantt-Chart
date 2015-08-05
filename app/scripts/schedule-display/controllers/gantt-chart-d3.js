@@ -1,7 +1,3 @@
-/**
- * @author Dimitry Kudrayvtsev
- * @version 2.1
- */
 
 d3.gantt = function() {
 
@@ -128,6 +124,10 @@ d3.gantt = function() {
 
 		initTimeDomain(tasks);
 		initAxis();
+
+		if ( ( constants.height + constants.margin.top + constants.margin.bottom ) < 0 ){
+			console.log('leo');
+		}
 		
 		//sets the svg to draw on
 		var svg = d3.select("body")

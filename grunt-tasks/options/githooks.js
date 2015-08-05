@@ -1,6 +1,4 @@
-/**
- * Created by g.baigorria on 28/02/14.
- */
+
 'use strict';
 module.exports = function(grunt) {
     grunt.config('githooks', {

@@ -1,6 +1,6 @@
 var constants = {
 
-    "tasks" : ganttHelper.getFlights(),
+    "tasks" : [],
 
     "taskStatus" : {
         "SUCCEEDED" : "bar height-flight",
@@ -14,6 +14,12 @@ var constants = {
         right : 40,
         bottom : 20,
         left : 80
+    },
+
+    "elementSpacing" : {
+        top : 20,
+        start : 20,
+        end : 20
     },
 
     "taskNames" : [
@@ -37,13 +43,16 @@ var constants = {
     "taskTypes" : [],
 
     "tickFormat" : "%H:%M"
-}
+},
+B = document.body,
+H = document.documentElement,
+height;
 
 
 
-constants.height = document.body.clientHeight - constants.margin.top - constants.margin.bottom-5,
+constants.height = (Math.max( B.scrollHeight, B.offsetHeight,H.clientHeight, H.scrollHeight, H.offsetHeight )) - constants.margin.top - constants.margin.bottom-5;
 
-constants.width = document.body.clientWidth - constants.margin.right - constants.margin.left-5,
+constants.width = document.body.clientWidth - constants.margin.right - constants.margin.left-5;
 
 constants.maxDate = constants.tasks.length > 0 ? constants.tasks[constants.tasks.length - 1].endDate : new Date();
 
@@ -53,10 +62,10 @@ constants.lastDate = constants.tasks.length - 1;
 
 constants.gantt = d3.gantt().taskTypes(constants.taskNames).taskStatus(constants.taskStatus).tickFormat(constants.format);
 
-constants.x = d3.time.scale().domain([ constants.timeDomainStart, constants.timeDomainEnd ]).range([ 0, constants.width ]).clamp(true),
+constants.x = d3.time.scale().domain([ constants.timeDomainStart, constants.timeDomainEnd ]).range([ 0, constants.width ]).clamp(true);
     
-constants.y = d3.scale.ordinal().domain(constants.taskTypes).rangeRoundBands([ 0, constants.height - constants.margin.top - constants.margin.bottom ], .1),
+constants.y = d3.scale.ordinal().domain(constants.taskTypes).rangeRoundBands([ 0, constants.height - constants.margin.top - constants.margin.bottom ], .1);
 
-constants.xAxis = d3.svg.axis().scale(constants.x).orient("bottom").tickFormat(d3.time.format(constants.tickFormat)).tickSubdivide(true).tickSize(5).tickPadding(3),
+constants.xAxis = d3.svg.axis().scale(constants.x).orient("bottom").tickFormat(d3.time.format(constants.tickFormat)).tickSubdivide(true).tickSize(5).tickPadding(3);
 
 constants.yAxis = d3.svg.axis().scale(constants.y).orient("left").tickSize(0);

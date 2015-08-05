@@ -1,3 +1,4 @@
+
 'use strict';
 
 module.exports = function(grunt) {
@@ -13,7 +14,7 @@ module.exports = function(grunt) {
             // tests and subfolders
             '<%= grunt.config.app %>/tests/**/*.js',
             // githooks
-            'git-hooks/*.js',
+            //'git-hooks/*.js',
             // grunt tasks and subfolders (options included)
             'grunt-tasks/**/*.js'
         ]
