@@ -1,0 +1,35 @@
+{
+	"filemap": {
+	 	"base-config.json": "base",
+	 	"dev-config.json": "development",
+	 	"qa-config.json": "qa",
+	 	"stag-config.json": "staging",
+		"prod-config.json": "production"
+	},
+
+	"default": {
+		"override": "base"
+	},
+
+	"environments": {
+		"base": {
+			"file":	"base-config.json"
+		},
+		"development": {
+			"file": "dev-config.json",
+			"override": ""
+		},
+		"qa": {
+			"file": "qa-config.json",
+			"override": ""
+		},
+		"staging": {
+			"file": "stag-config.json",
+			"override": ""
+		},
+		"production": {
+			"file": "prod-config.json",
+			"override": ""
+		}
+	}
+}

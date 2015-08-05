@@ -1,0 +1,14 @@
+/**
+ * Main scss file to be pre-compiled
+ */
+
+// global
+@import "mixins";
+@import "variables";
+@import "main";
+@import "theme";
+@import "modules";
+@import "schedule_display";
+
+// Auto imported modules (feature generator) DON'T DELETE "yo:" lines
+// yo:includeSass

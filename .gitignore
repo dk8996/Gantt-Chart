@@ -1,12 +1,15 @@
-*.class
-
-# Package Files #
-*.jar
-*.war
-*.ear
-
-# eclipse project files.
-.classpath
-.project
-.settings
-
+node_modules
+dist
+.tmp
+.idea
+.sass-cache
+app/bower_components
+.svn
+.DS_Store
+coverage
+README.html
+app/styles/*.css
+*.appcache
+*.cache
+mockeyDebugFile.log
+app/scripts/services/environment-config.js
