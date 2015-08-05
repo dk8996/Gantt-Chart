@@ -9,10 +9,10 @@ module.exports = function(grunt) {
         
         grunt.task.run([
             //'register-git-hooks',
-            'jshint',
+            //'jshint',
             'bowerInstall',
             'compass:dev',
-            'csslint',
+            //'csslint',
             'connect:livereload',
             'open:server',
             'ngconstant:development',
