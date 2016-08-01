@@ -97,7 +97,7 @@ d3.gantt = function() {
 	 .attr("transform", rectTransform)
 	 .attr("height", function(d) { return y.rangeBand(); })
 	 .attr("width", function(d) { 
-	     return (x(d.endDate) - x(d.startDate)); 
+	     return Math.max(1,(x(d.endDate) - x(d.startDate))); 
 	     });
 	 
 	 
@@ -136,14 +136,14 @@ d3.gantt = function() {
 	 .attr("transform", rectTransform)
 	 .attr("height", function(d) { return y.rangeBand(); })
 	 .attr("width", function(d) { 
-	     return (x(d.endDate) - x(d.startDate)); 
+	     return Math.max(1,(x(d.endDate) - x(d.startDate))); 
 	     });
 
         rect.transition()
           .attr("transform", rectTransform)
 	 .attr("height", function(d) { return y.rangeBand(); })
 	 .attr("width", function(d) { 
-	     return (x(d.endDate) - x(d.startDate)); 
+	     return Math.max(1,(x(d.endDate) - x(d.startDate))); 
 	     });
         
 	rect.exit().remove();
