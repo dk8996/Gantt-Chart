@@ -243,5 +243,12 @@ d3.gantt = function() {
       return gantt;
     };
 
+    gantt.keyFunction = function(value) {
+      if (!arguments.length)
+        return keyFunction
+      keyFunction = value;
+      return gantt;
+    }
+
     return gantt;
 };
