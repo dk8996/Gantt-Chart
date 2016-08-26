@@ -23,6 +23,9 @@ d3.gantt = function() {
     var width = document.body.clientWidth - margin.right - margin.left-5;
 
     var tickFormat = "%H:%M";
+    var ticksCount = 10;
+    var ticksInterval = null;
+    var ticksIntervalCount = null;
 
     var keyFunction = function(d) {
 	return d.startDate + d.taskName + d.endDate;
@@ -64,6 +67,11 @@ d3.gantt = function() {
 	y = d3.scale.ordinal().domain(taskTypes).rangeRoundBands([ 0, height - margin.top - margin.bottom ], .1);
 	xAxis = d3.svg.axis().scale(x).orient("bottom").tickFormat(d3.time.format(tickFormat)).tickSubdivide(true)
 		.tickSize(8).tickPadding(8);
+	if (ticksInterval !== null && ticksIntervalCount !== null) {
+		xAxis.ticks(ticksInterval, ticksIntervalCount);
+	} else {
+		xAxis.ticks(ticksCount);
+	}
 
 	yAxis = d3.svg.axis().scale(y).orient("left").tickSize(0);
     };
@@ -214,6 +222,20 @@ d3.gantt = function() {
 	    return tickFormat;
 	tickFormat = value;
 	return gantt;
+    };
+
+    gantt.ticks = function(...args) {
+    if (!arguments.length)
+    	return ticksCount;
+   	if (arguments.length == 1) {
+   		ticksInterval = null;
+   		ticksIntervalCount = null;
+   		ticksCount = arguments[0];
+   	} else {
+	   	ticksInterval = arguments[0];
+	   	ticksIntervalCount = arguments[1];
+	}
+   	return gantt;
     };
 
     gantt.selector = function(value) {
