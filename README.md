@@ -4,11 +4,11 @@ A basic implementation of a Gantt Chart using D3.js. Here is a example [Example 
 ![screenshot](https://raw.github.com/dk8996/Gantt-Chart/master/examples/screenshot1.png)
 
 #### External Data Example
-Here is a [example] (http://static.mentful.com/d3ganttchart/example.html) of loading external data, in JSON format, into the Gantt Chart, you need to watch out for [cross-domain restrictions] (http://en.wikipedia.org/wiki/Same-origin_policy). 
+Here is an [example] (http://static.mentful.com/d3ganttchart/example.html) of loading external data, in JSON format, into the Gantt Chart, you need to watch out for [cross-domain restrictions] (http://en.wikipedia.org/wiki/Same-origin_policy). 
 
 ## Getting Started
 ### Data
-Create a array of all your data.
+Create an array of all your data.
 
 ```javascript
 var tasks = [
@@ -63,7 +63,7 @@ var taskStatus = {
   }
 ```
 ### Task Names
-Create a array of task names, they will be display on they y-axis in the order given to the array.
+Create an array of task names, they will be display on they y-axis in the order given to the array.
 
 ```javascript
 var taskNames = [ "D Job", "P Job", "E Job", "A Job", "N Job" ];
