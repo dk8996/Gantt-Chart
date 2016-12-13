@@ -96,4 +96,3 @@ Relies on the fantastic [D3 visualization library](http://mbostock.github.com/d3
    See the License for the specific language governing permissions and
    limitations under the License.
    
-   [![githalytics.com alpha](https://cruel-carlota.pagodabox.com/c088458a0319a78b63aaea9c54fba4de "githalytics.com")](http://githalytics.com/dk8996/Gantt-Chart)
